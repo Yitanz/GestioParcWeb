@@ -72,7 +72,7 @@ if($_SESSION['rol'] != 3) {
                   <a class="nav-link nav-interior" href="gestioEmpleat/crearEmpleat.php"><span data-feather="user-plus"></span>Crear Empleat</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-interior" href="#gestioEmpleat/"><span data-feather="file-text"></span>Llistar Empleats</a>
+                  <a class="nav-link nav-interior" href="gestioEmpleat/llistarEmpleat.php"><span data-feather="file-text"></span>Llistar Empleats</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link nav-interior" href="#gestioEmpleat/"><span data-feather="edit"></span>Modificar Empleat</a>

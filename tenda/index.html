@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type"
+		 content="text/html;charset=utf-8">
+	<title>Array Multidimensional</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var roba = new Array('chaqueta','samarreta', 'camisa', 'gorra');
+    var coloret = new Array('roig','taronja','groc');
+    var talla = new Array('L','M','X','XL');
+    var pedido = new Array(roba, coloret, talla);
+
+
+    var preu_roba = new Array(5,9,50,4);
+    var preu_coloret = new Array(10,10,10);
+    var preu_talla = new Array(5,5,6,9);
+    var tot_preu = new Array(preu_roba, preu_coloret, preu_talla);
+    var roba = roba.push("pantalons");
+    var preu_roba = preu_roba.push(20);
+
+		var roba_triat = new Array();
+
+    var resultat = 0;
+
+    function calcular_preu(tot_preu,i,j, pedido){
+
+       resultat = resultat + tot_preu[i][j];
+    //   document.write("el preu de la comanda es:"+resultat);
+       document.getElementById('preu').innerHTML = resultat
+			 roba_triat.push(pedido[i][j]);
+			 document.getElementById('pedido').innerHTML = roba_triat;
+    }
+
+    document.write("<h1> Tenda SPAM, la millor roba </h1>");
+    for(i=0; i<pedido.length; i++){
+      for(j=0; j<pedido[i].length; j++){
+        document.write("<button onclick=\"calcular_preu(tot_preu,"+i+","+j+",pedido)\">"+ pedido [i][j] +"</button>");
+      }
+      document.write("<br> <br> <br>");
+    }
+
+    //calcular_preu(resultat);
+    document.write("<p>el preu de la comanda es:</p>");
+    document.write("<p id=\"preu\">€</p>");
+		document.write("<p>La comanda realitzada conte	:</p>");
+		document.write("<p id=\"pedido\"></p>");
+    </script>
+</body>
+</html>

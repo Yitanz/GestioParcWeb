@@ -237,30 +237,39 @@
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Crear noticia</h1>
+          <h1 class="h2">Crear Incidencies</h1>
         </div>
 
-        <form class="needs-validation" method="post" action="../../php/registrar_noticia.php">
+        <form class="needs-validation" method="post" action="../../php/registrar_incidencia.php">
           <div class="form-row">
             <div class="col-md-3 mb-3">
-              <label for="nom">Titol Noticia *</label>
-              <input type="text" class="form-control form-control-sm" placeholder="Titol noticia" name="titol_noticia" required>
+              <label for="titol_incidencia">Titol Incidencia *</label>
+              <input type="text" class="form-control form-control-sm" placeholder="Titol noticia" name="titol_incidencia_parc" required>
             </div>
             <div class="col-md-3 mb-3">
-              <label for="cognom1">Descripcio Noticia *</label>
-              <input type="text" class="form-control form-control-sm" placeholder="Descripcio de la Noticia" name="descripcio_noticia" required>
+              <label for="descripcio">Descripcio Incidencia *</label>
+              <input type="text" class="form-control form-control-sm" placeholder="Descripcio de la incidencia" name="descripcio_incidencia_parc" required>
             </div>
             <div class="col-md-3 mb-3">
-              <label for="cognom2">Data de la noticia</label>
-              <input type="text" class="form-control form-control-sm" placeholder="Data de la noticia" name="data_noticia">
+              <label for="cognom2">Prioritat incidencia</label>
+              <input type="text" class="form-control form-control-sm" placeholder="Prioritat de la incidencia" name="prioritat_incidencia_parc">
             </div>
-        
+            <div class="col-md-3 mb-3">
+              <label for="cognom2">Data inici incidencia</label>
+              <input type="text" class="form-control form-control-sm" placeholder="Data inici de la incidencia" name="data_inici_incidencia_parc">
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="cognom2">Data fi incidencia</label>
+              <input type="text" class="form-control form-control-sm" placeholder="Data fi de la incidencia" name="data_fi_incidencia_parc">
+            </div>
+    
+            </div>
           <button class="btn btn-primary" type="submit">Crear</button>
           <button class="btn btn-primary" type="reset">Cancel·lar</button>
         </form>
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Crear noticies de forma massiva</h1>
+          <h1 class="h2">Crear incidencies de forma massiva</h1>
         </div>
 
         <form>

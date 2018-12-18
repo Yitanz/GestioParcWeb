@@ -10,6 +10,7 @@ if($_SESSION['rol'] != 3) {
 
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -48,7 +49,6 @@ if($_SESSION['rol'] != 3) {
       </li>
     </ul>
   </nav>
-
 
   <div class="container-fluid">
     <div class="row">
@@ -330,10 +330,10 @@ if($_SESSION['rol'] != 3) {
             </li>
             <ul class="nav flex-column collapse show" id="submenu9" data-parent="#sidebar">
               <li class="nav-item">
-                <a class="nav-link nav-interior" href="../noticies/crearNoticia.php"><span data-feather="user-plus"></span>Crear Noticia</a>
+                <a class="nav-link nav-interior active" href="../noticies/crearNoticia.php"><span data-feather="user-plus"></span>Crear Noticia</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link nav-interior active" href="../noticies/llistarNoticia.php"><span data-feather="file-text"></span>Llistar Noticia</a>
+                <a class="nav-link nav-interior" href="../noticies/llistarNoticia.php"><span data-feather="file-text"></span>Llistar Noticia</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link nav-interior" href="#"><span data-feather="edit"></span>Modificar Noticia</a>
@@ -349,44 +349,63 @@ if($_SESSION['rol'] != 3) {
       </nav>
 
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Llistar les notcies actives</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">
-                  <span data-feather="save"></span>
-                  Exportar</button>
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Crear noticia</h1>
+        </div>
+
+        <form class="needs-validation" method="post" action="../../php/registrar_noticia.php">
+          <div class="form-row">
+            <div class="col-md-3 mb-3">
+              <label for="nom">Titol Noticia *</label>
+              <input type="text" class="form-control form-control-sm" placeholder="Titol noticia" name="titol_noticia" required>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="cognom1">Descripcio Noticia *</label>
+              <input type="text" class="form-control form-control-sm" placeholder="Descripcio de la Noticia" name="descripcio_noticia" required>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="cognom2">Data de la noticia</label>
+              <input type="text" class="form-control form-control-sm" placeholder="Data de la noticia" name="data_noticia">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Crear</button>
+          <button class="btn btn-secondary" type="reset">Cancel·lar</button>
+        </form>
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Crear noticies de forma massiva</h1>
+        </div>
+
+        <form>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-3 mb-3">
+                <label for="exampleFormControlFile1">Pujar arxiu .CSV amb dades de noticies</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1">
               </div>
             </div>
           </div>
+        </form>
 
-          <div class="table-responsive">
-          <?php
-          include_once("../../php/class/class_noticia.php");
-
-          $noticia = new noticia();
-
-          $noticia->llistar_noticia();
-          ?>
-          </div>
-        </main>
-      </div>
+      </main>
     </div>
+  </div>
 
-    <!-- Bootstrap core JavaScript -->
-    <!-- Posades al final del document per a que carregui més ràpid -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!-- Bootstrap core JavaScript -->
+  <!-- Posades al final del document per a que carregui més ràpid -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
   <!-- Icones Feather -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-      feather.replace()
-    </script>
+  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+  <script>
+    feather.replace()
+  </script>
 
-  </body>
+</body>
+
 </html>

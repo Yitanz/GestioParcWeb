@@ -46,8 +46,7 @@
         <div class="sidebar-sticky">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="home"></span>
+              <a class="nav-link" href="#"><span data-feather="home"></span>
                 Inici
               </a>
             </li>
@@ -83,16 +82,39 @@
             </li>
             <ul class="nav flex-column collapse show" id="submenu1" data-parent="#sidebar">
               <li class="nav-item">
-                <a class="nav-link nav-interior" href="crearClient.html"><span data-feather="user-plus"></span>Crear Client</a>
+                <a class="nav-link nav-interior active" href="crearClient.html"><span data-feather="user-plus"></span>Crear Client</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link nav-interior" href="llistarClients.html"><span data-feather="file-text"></span>Llistar Clients</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link nav-interior active" href="modificarClient.html"><span data-feather="edit"></span>Modificar Client</a>
+                <a class="nav-link nav-interior" href="modificarClient.html"><span data-feather="edit"></span>Modificar Client</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link nav-interior" href="eliminarClient.html"><span data-feather="user-minus"></span>Eliminar Client</a>
+              </li>
+            </ul>
+             
+              
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="collapse" aria-expanded="false" href="#submenu1">
+                <span data-feather="users"></span>
+                Gestionar Noticies <span class="sr-only"></span>
+                <span data-feather="chevron-right"></span>
+              </a>
+            </li>
+            <ul class="nav flex-column collapse show" id="submenu1" data-parent="#sidebar">
+              <li class="nav-item">
+                <a class="nav-link nav-interior active" href="crearNoticia.html"><span data-feather="user-plus"></span>Crear Noticia</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-interior" href="llistarNoticia.php"><span data-feather="file-text"></span>Llistar Noticia</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-interior" href="modificarNoticia.html"><span data-feather="edit"></span>Modificar Noticia</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-interior" href="eliminarNoticia.html"><span data-feather="user-minus"></span>Eliminar Noticia</a>
               </li>
             </ul>
 
@@ -168,11 +190,45 @@
             </li>
             <ul class="nav flex-column collapse" id="submenu6" data-parent="#sidebar">
               <li class="nav-item">
-                <a class="nav-link nav-interior" data-toggle="collapse" aria-expanded="false" href="#"><span data-feather="trash-2"></span>Gestionar Neteja<span data-feather="chevron-right"></span></a>
+                <a class="nav-link nav-interior" data-toggle="collapse" aria-expanded="false" href="#sub-submenu4"><span data-feather="trash-2"></span>Gestionar Neteja<span data-feather="chevron-right"></span></a>
               </li>
+              <ul class="nav flex-column collapse" id="sub-submenu4" data-parent="#submenu6">
+                <li class="nav-item">
+                  <a class="nav-link nav-interior2" href="#"><span data-feather="plus-square"></span>Crear Tasca Neteja</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-interior2" href="#"><span data-feather="file-text"></span>Llistar Tasques Neteja</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-interior2" href="#"><span data-feather="edit"></span>Modificar Tasca Neteja</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-interior2" href="#"><span data-feather="minus-square"></span>Eliminar Tasca Neteja</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-interior2" href="#"><span data-feather="user-plus"></span>Assignar Tasca Neteja</a>
+                </li>
+              </ul>
               <li class="nav-item">
-                <a class="nav-link nav-interior" data-toggle="collapse" aria-expanded="false" href="#"><span data-feather="settings"></span>Gestionar Manteniment<span data-feather="chevron-right"></span></a>
+                <a class="nav-link nav-interior" data-toggle="collapse" aria-expanded="false" href="#sub-submenu5"><span data-feather="settings"></span>Gestionar Manteniment<span data-feather="chevron-right"></span></a>
               </li>
+              <ul class="nav flex-column collapse" id="sub-submenu5" data-parent="#submenu6">
+                <li class="nav-item">
+                  <a class="nav-link nav-interior2" href="#"><span data-feather="plus-square"></span>Crear Tasca Manteniment</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-interior2" href="#"><span data-feather="file-text"></span>Llistar Tasques Manteniment</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-interior2" href="#"><span data-feather="edit"></span>Modificar Tasca Manteniment</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-interior2" href="#"><span data-feather="minus-square"></span>Eliminar Tasca Manteniment</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-interior2" href="#"><span data-feather="user-plus"></span>Assignar Tasca Manteniment</a>
+                </li>
+              </ul>
             </ul>
           </ul>
         </div>
@@ -181,87 +237,57 @@
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Modificar client</h1>
+          <h1 class="h2">Crear Incidencies</h1>
         </div>
 
-        <form class="needs-validation" action="#">
+        <form class="needs-validation" method="post" action="../../php/registrar_incidencia.php">
           <div class="form-row">
             <div class="col-md-3 mb-3">
-              <label for="validationCustom01">Nom *</label>
-              <input type="text" class="form-control form-control-sm" placeholder="Nom" required>
+              <label for="titol_incidencia">Titol Incidencia *</label>
+              <input type="text" class="form-control form-control-sm" placeholder="Titol noticia" name="titol_incidencia_parc" required>
             </div>
             <div class="col-md-3 mb-3">
-              <label for="validationCustom02">Cognom 1 *</label>
-              <input type="text" class="form-control form-control-sm" placeholder="Cognom 1" required>
+              <label for="descripcio">Descripcio Incidencia *</label>
+              <input type="text" class="form-control form-control-sm" placeholder="Descripcio de la incidencia" name="descripcio_incidencia_parc" required>
             </div>
             <div class="col-md-3 mb-3">
-              <label for="validationCustom02">Cognom 2</label>
-              <input type="text" class="form-control form-control-sm" placeholder="Cognom 2">
+              <label for="cognom2">Prioritat incidencia</label>
+              <input type="text" class="form-control form-control-sm" placeholder="Prioritat de la incidencia" name="prioritat_incidencia_parc">
             </div>
             <div class="col-md-3 mb-3">
-              <label for="validationCustom03">Tipus document</label>
-              <div class="input-group">
-                <select class="form-control form-control-sm">
-                  <option>DNI</option>
-                  <option>NIE</option>
-                  <option>CIF</option>
-                  <option>Altres</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-md-3 mb-3">
-              <label for="validationCustom04">Nº document *</label>
-              <input type="text" class="form-control form-control-sm" placeholder="Número document" required>
+              <label for="cognom2">Data inici incidencia</label>
+              <input type="text" class="form-control form-control-sm" placeholder="Data inici de la incidencia" name="data_inici_incidencia_parc">
             </div>
             <div class="col-md-3 mb-3">
-              <label for="validationCustom05">Data de Naixement *</label>
-              <input type="date" class="form-control form-control-sm" placeholder="Data naixement" required>
+              <label for="cognom2">Data fi incidencia</label>
+              <input type="text" class="form-control form-control-sm" placeholder="Data fi de la incidencia" name="data_fi_incidencia_parc">
+            </div>
+              <div class="col-md-3 mb-3">
+              <label for="cognom2">ID_estat</label>
+              <input type="text" class="form-control form-control-sm" placeholder="id estat de la incidencia" name="id_estat">
             </div>
             <div class="col-md-3 mb-3">
-              <label for="validationCustom09">Sexe</label>
-              <select class="form-control form-control-sm">
-                <option>Home</option>
-                <option>Dona</option>
-              </select>
+              <label for="cognom2">ID_usuari_client</label>
+              <input type="text" class="form-control form-control-sm" placeholder="id usuari client" name="id_usuari_client">
             </div>
             <div class="col-md-3 mb-3">
-              <label for="validationCustom07">Telèfon de contacte</label>
-              <input type="text" class="form-control form-control-sm" placeholder="Telèfon de contacte">
+              <label for="cognom2">ID_usuari_empleat</label>
+              <input type="text" class="form-control form-control-sm" placeholder="id usuari empleat" name="id_usuari_empleat">
             </div>
-          </div>
-          <div class="form-row">
-            <div class="col-md-3 mb-3">
-              <label for="validationCustom04">Correu electrònic *</label>
-              <input type="text" class="form-control form-control-sm" placeholder="Email" required>
             </div>
-            <div class="col-md-3 mb-3">
-              <label for="validationCustom09">Adreça *</label>
-              <input type="text" class="form-control form-control-sm" placeholder="Adreça" required>
-            </div>
-            <div class="col-md-3 mb-3">
-              <label for="validationCustom09">Ciutat *</label>
-              <input type="text" class="form-control form-control-sm" placeholder="Ciutat" required>
-            </div>
-            <div class="col-md-3 mb-3">
-              <label for="validationCustom10">Provincia *</label>
-              <input type="text" class="form-control form-control-sm" placeholder="Provincia" required>
-            </div>
-          </div>
-          <button class="btn btn-primary" type="submit">Modificar</button>
+          <button class="btn btn-primary" type="submit">Crear</button>
           <button class="btn btn-primary" type="reset">Cancel·lar</button>
         </form>
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Modificar clients de forma massiva</h1>
+          <h1 class="h2">Crear incidencies de forma massiva</h1>
         </div>
 
         <form>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-3 mb-3">
-                <label for="exampleFormControlFile1">Pujar arxiu .CSV amb clients a modificar</label>
+                <label for="exampleFormControlFile1">Pujar arxiu .CSV amb dades de noticies</label>
                 <input type="file" class="form-control-file" id="exampleFormControlFile1">
               </div>
             </div>

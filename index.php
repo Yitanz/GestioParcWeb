@@ -19,8 +19,8 @@
 <body>
 <?php
 session_start();
-$_SESSION['rol'] = 9999;
-$_SESSION['id_usuari'] = 9999; 
+//$_SESSION['rol'] = 9999;
+//$_SESSION['id_usuari'] = 9999;
 //var_dump($_SESSION);
 if ($_SESSION['rol']==1 ) :?>
 
@@ -244,7 +244,7 @@ if ($_SESSION['rol']==3 ) :?>
 
 <?php endif ?>
 
-<?php if($_SESSION['rol']==9999) :
+<?php if(!isset($_SESSION['rol'])) :
   var_dump($_SESSION)?>
   <nav class="navbar navbar-expand-sm py-0">
     <div class="collapse navbar-collapse flex-row-reverse" id="collapsibleNavbar">

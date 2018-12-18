@@ -146,8 +146,8 @@ class Empleat {
         $rol = $row['id_rol'];
         $hash = $row['password'];
     }
-    //$isValid = password_verify($this->pass, $hash);
-    $isValid = true;
+    $isValid = password_verify($this->pass, $hash);
+    //$isValid = true;
     if ($isValid)
     {
       echo 'VALID';

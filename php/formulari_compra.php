@@ -19,6 +19,7 @@
 <body>
 <?php
 session_start();
+include_once("class/class_client.php");
 //var_dump($_SESSION);
 if ($_SESSION['rol']==1 ) :?>
 
@@ -318,27 +319,11 @@ include_once("class/class_client.php");
 <div class="container jumbotron" style="margin-top:30px">
       <form class="align-items-center justify-content-center d-flex" method="post" action="validar_pagament.php">
         <div class="col-sm-12">
-          <div class="form-group">
-            <label>Nom</label>
-            <input type="text" class="form-control" name="nom"id="exampleInputText1" placeholder="Nom" required>
-          </div>
-          <div class="form-group">
-            <label>Primer cognom</label>
-            <input type="text" class="form-control" name="cognom1" id="exampleInputText1" placeholder="Primer cognom" required>
-          </div>
-          <div class="form-group">
-            <label>Segon cognom</label>
-            <input type="text" class="form-control" name="cognom2" id="exampleInputText1" placeholder="Segon cognom">
-          </div>
-          <div class="form-group">
-            <label>Número de telèfon</label>
-            <input type="number" class="form-control" name="telefon" id="exampleInputText1" placeholder="Número de telèfon" >
-          </div>
-          <div class="form-group">
-            <label>Adreça de correu electrònic</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Escriu el teu email" required>
-            <small id="emailHelp" class="form-text text-muted">No compartirem el teu email amb ningú.</small>
-          </div>
+            <?php
+            Client::omplirDades($_SESSION['username']);
+             ?>
+
+        
           <div class="form-group">
             <label>Targeta Credit/Debit</label>
             <input type="text" name="targeta" class="form-control" id="exampleInputText1" required></input>

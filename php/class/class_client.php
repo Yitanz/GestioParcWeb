@@ -671,5 +671,64 @@ echo '<!-- Modal -->
       }
 
   }
+  	  public static function omplirDades($email)
+  {
+    try {
+        $connection = crearConnexio();
+
+        if ($connection->connect_error) {
+            die("Connexió fallida: " . $connection->connect_error);
+        }
+
+        $sql = "SELECT nom, cognom1, cognom2, telefon, email FROM USUARI WHERE email='$email'";
+
+        $result = $connection->query($sql);
+
+        if(!$result) {
+          throw new Exception();
+        }
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $nom = $row['nom'];
+                $cognom1 = $row['cognom1'];
+                $cognom2 = $row['cognom2'];
+                $telefon = $row['telefon'];
+                $email = $row['email'];
+
+                echo '
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" class="form-control" name="nom"id="exampleInputText1" value='.$nom.' required>
+                </div>
+                <div class="form-group">
+                  <label>Primer cognom</label>
+                  <input type="text" class="form-control" name="cognom1" id="exampleInputText1" value='.$cognom1.' required>
+                </div>
+                <div class="form-group">
+                  <label>Segon cognom</label>
+                  <input type="text" class="form-control" name="cognom2" id="exampleInputText1" value='.$cognom2.'>
+                </div>
+                <div class="form-group">
+                  <label>Número de telèfon</label>
+                  <input type="text" class="form-control" name="telefon" id="exampleInputText1" value='.$telefon.' >
+                </div>
+                <div class="form-group">
+                  <label>Adreça de correu electrònic</label>
+                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value='.$email.' required>
+                  <small id="emailHelp" class="form-text text-muted">No compartirem el teu email amb ningú.</small>
+                </div>
+                ';
+            }
+        } else {
+            echo '';
+        }
+        $connection->close();
+      }
+      catch (Exception $e) {
+        echo 'Error al realitzar la consulta.';
+      }
+
+  }
 }
 ?>

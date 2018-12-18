@@ -44,12 +44,12 @@ if ($_SESSION['rol']==1 ) :?>
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle " id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="/perfil.php"><?php echo $_SESSION['username']?></a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="perfil/perfil_client.php">Perfil</a></li>
+            <li><a class="dropdown-item" href="perfil.php">Perfil</a></li>
             <li><a class="dropdown-item" href="logout.php">Tancar Sessio</a></li>
           </ul>
         </li>
           <li>
-            <button type="button" class="btn btn-default btn-sm" onclick="window.location.href='cistella/clases/carrito.php'">
+            <button type="button" class="btn btn-default btn-sm" onclick="window.location.href='/php/viewCart.php'">
               <img src="img/carrito.png">
             </button>
           </li>

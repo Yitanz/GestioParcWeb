@@ -75,7 +75,7 @@ if($_SESSION['rol'] != 3) {
                 <a class="nav-link nav-interior active" href="../gestioEmpleat/crearEmpleat.php"><span data-feather="user-plus"></span>Crear Empleat</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link nav-interior" href="#../gestioEmpleat/llistarEmpleat.php"><span data-feather="file-text"></span>Llistar Empleats</a>
+                <a class="nav-link nav-interior" href="../gestioEmpleat/llistarEmpleat.php"><span data-feather="file-text"></span>Llistar Empleats</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link nav-interior" href="#../gestioEmpleat/modificarEmpleat.php"><span data-feather="edit"></span>Modificar Empleat</a>
@@ -263,8 +263,8 @@ if($_SESSION['rol'] != 3) {
                 <a class="nav-link nav-interior" href="#../gestioIncidencia/"><span data-feather="minus-square"></span>Eliminar Inicidència</a>
               </li>
             </ul>
-              
-              
+
+
                             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" aria-expanded="false" href="#submenu9">
                 <span data-feather="alert-triangle"></span>
@@ -286,7 +286,7 @@ if($_SESSION['rol'] != 3) {
                 <a class="nav-link nav-interior" href="#"><span data-feather="user-minus"></span>Eliminar Noticia</a>
               </li>
             </ul>
-              
+
 
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" aria-expanded="false" href="#submenu6">

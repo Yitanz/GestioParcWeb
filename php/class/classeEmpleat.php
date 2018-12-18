@@ -78,7 +78,7 @@ class Empleat {
         if (mysqli_connect_errno()) {
             printf("Connect failed: %s\n", mysqli_connect_error());
             exit();
-        }
+        }$stmt$stmt
         $connection->autocommit(FALSE);
         $sql= "INSERT INTO DADES_EMPLEAT (codi_seg_social, num_nomina, IBAN, especialitat, carrec, data_inici_contracte, data_fi_contracte, id_horari) VALUES (?,?,?,?,?,?,?,?);";
         $stmt = $connection->prepare($sql);
@@ -178,7 +178,7 @@ class Empleat {
     $connection->close();
   }
   public static function SelecciollistarUsuarisBusqueda(){
-  $conexio = crearConnexio();
+  $connection = crearConnexio();
   //if ($conexio->connect_error)
   //{
   //    die('Error de conexión: ' . $conexion->connect_error);
@@ -186,7 +186,7 @@ class Empleat {
   $busqueda = $_POST['buscar_empleat'];
   //$_POST['busqueda_atraccio']
   $sql = "SELECT * FROM USUARI WHERE id_rol !=1 && nom LIKE '%$busqueda%' or cognom1 LIKE '%$busqueda%' or cognom2 like '%$busqueda%' or numero_document like '%$busqueda%'";
-  $result = $conexio->query($sql);
+  $result = $connection->query($sql);
   echo '<table class="table">';
   echo '  <thead>';
   echo '    <tr>';
@@ -210,22 +210,7 @@ class Empleat {
         $cognom1 = $row["cognom1"];
         $cognom2 = $row["cognom2"];
         $num_doc = $row["numero_document"];
-        /*$altura_max = $row["altura_max"];
-        $accessibilitat = $row["accessibilitat"];
-        $acces_express = $row["acces_express"];
-        $data_creacio_registre = $row["data_creacio_registre"];*/
-        /*if ($accessibilitat == 1) {
-          $mostrarAccessibilitat = "Si";
-        }
-        if ($accessibilitat == 0) {
-          $mostrarAccessibilitat = "No";
-        }
-        if ($acces_express == 1) {
-          $mostrarAcces_express = "Si";
-        }
-        if ($acces_express == 0) {
-          $mostrarAcces_express = "No";
-        }*/
+
         echo '  <tbody>';
         echo '    <tr>';
         echo '      <th scope="row">'.$row["id_usuari"].'</th>';
@@ -233,10 +218,6 @@ class Empleat {
         echo '      <td>'.$row["cognom1"].'</td>';
         echo '      <td>'.$row["cognom2"].'</td>';
         echo '      <td>'.$row["numero_document"].'</td>';
-        /*echo '      <td>'.$row["altura_max"].'</td>';
-        echo '      <td>'.$mostrarAccessibilitat.'</td>';
-        echo '      <td>'.$mostrarAcces_express.'</td>';
-        echo '      <td>'.$row["data_creacio_registre"].'</td>';*/
         echo '      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> Seleccionar Empleats
                     </button></td>';
         echo '    </tr>';
@@ -244,78 +225,339 @@ class Empleat {
       }
     }
         echo '</table>';
-        $conexio->close();
+        $connection->close();
   }
+
+
+
   public static function SelecciollistarUsuaris(){
-    $conexio = crearConnexio();
-    //if ($conexio->connect_error)
-    //{
-    //    die('Error de conexión: ' . $conexion->connect_error);
-    //}
-    //$busqueda = $_POST['busqueda_atraccio'];
-    //$_POST['busqueda_atraccio']
-    $sql = "SELECT * FROM USUARI WHERE id_rol != 1";
-    $result = $conexio->query($sql);
-    echo '<table class="table">';
-    echo '  <thead>';
-    echo '    <tr>';
-    echo '      <th scope="col">ID</th>';
-    echo '      <th scope="col">Nom</th>';
-    echo '      <th scope="col">Cog 1</th>';
-    echo '      <th scope="col">Cog 2</th>';
-    echo '      <th scope="col">DNI</th>';
-    /*echo '      <th scope="col">Altura maxima</th>';
-    echo '      <th scope="col">Accessibilitat</th>';
-    echo '      <th scope="col">Acces express</th>';
-    echo '      <th scope="col">Data creacio registre</th>';*/
-    echo '      <th scope="col"></th>';
-    echo '      <th scope="col"></th>';
-    echo '    </tr>';
-    echo '  </thead>';
-    if ($result) {
-      //echo ' <form method="post">';
-        while($row = $result->fetch_assoc()) {
-          $id_empleat = $row["id_usuari"];
-          $nom = $row["nom"];
-          $cognom1 = $row["cognom1"];
-          $cognom2 = $row["cognom2"];
-          $num_doc = $row["numero_document"];
-          /*$altura_max = $row["altura_max"];
-          $accessibilitat = $row["accessibilitat"];
-          $acces_express = $row["acces_express"];
-          $data_creacio_registre = $row["data_creacio_registre"];*/
-          /*if ($accessibilitat == 1) {
-            $mostrarAccessibilitat = "Si";
+      try{
+      $connection = crearConnexio();
+
+      $sql = "SELECT * FROM USUARI LEFT JOIN DADES_EMPLEAT ON USUARI.id_dades_empleat = DADES_EMPLEAT.id_dades_empleat
+                                    LEFT JOIN HORARI ON HORARI.id_horari = DADES_EMPLEAT.id_horari
+                                    LEFT JOIN ROL ON ROL.id_rol = USUARI.id_rol WHERE USUARI.id_rol != 1";
+      $result = $connection->query($sql);
+
+      echo '<table class="table">';
+      echo '  <thead>';
+      echo '    <tr>';
+      echo '      <th scope="col">ID</th>';
+      echo '      <th scope="col">Nom</th>';
+      echo '      <th scope="col">Cog 1</th>';
+      echo '      <th scope="col">Cog 2</th>';
+      echo '      <th scope="col">DNI</th>';
+      echo '    </tr>';
+      echo '  </thead>';
+
+      if ($result) {
+          while($row = $result->fetch_assoc()) {
+            $id_empleat = $row["id_usuari"];
+            $nom = $row["nom"];
+            $cognom1 = $row["cognom1"];
+            $cognom2 = $row["cognom2"];
+            $num_doc = $row["nom"];
+            $tipus_doc = $row["tipus_document"];
+            $tlf = $row["telefon"];
+            $email = $row["email"];
+            $adreca = $row["adreca"];
+            $ciutat = $row["ciutat"];
+            $provincia = $row["provincia"];
+            $codi_postal = $row["codi_postal"];
+            $codi_ss = $row["codi_seg_social"];
+            $num_nomina = $row["num_nomina"];
+            $iban = $row["IBAN"];
+            $especialitat = $row["especialitat"];
+            $carrec = $row["carrec"];
+            $sexe = $row["sexe"];
+            $data_naixement = $row["data_naixement"];
+            $rol = $row["id_rol"];
+            $nom_rol = $row["nom_rol"];
+            $data_inici = $row["data_inici_contracte"];
+            $data_fi = $row["data_fi_contracte"];
+            $horari = $row["id_horari"];
+            $torn = $row["torn"];
+
+
+            echo '  <tbody>';
+            echo '    <tr>';
+            echo '      <th scope="row">'.$row["id_usuari"].'</th>';
+            echo '      <td>'.$row["nom"].'</td>';
+            echo '      <td>'.$row["cognom1"].'</td>';
+            echo '      <td>'.$row["cognom2"].'</td>';
+            echo '      <td>'.$row["numero_document"].'</td>';
+            echo '      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalModificar'.$id_empleat.'">Modificar</button></td>"';
+            echo '      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEliminar'.$id_empleat.'">Eliminar</button></td>"';
+            echo '      <br>';
+            echo '    </tr>';
+            echo '  </tbody>';
+
+            /*Modal de modificar*/
+            echo '<!-- Modal -->
+          <div class="modal fade" id="modalModificar'.$id_empleat.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Modificar Empleat</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <form method="post">
+                    <div class="form-group row">
+                     <div class="col-10">
+                       <input class="form-control" type="text" value="'.$id_empleat.'" id="example-text-input" name="id_empleat" style="display: none;">
+                     </div>
+                    </div>
+
+
+                    <!-- <form class="needs-validation" method="post" action="<?php echo htmlentities($_SERVER[\'PHP_SELF\']); ?>"> -->
+                      <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                          <label for="nom">Nom *</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Nom" name="nom" value="'.$nom.'" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="cognom1">Cognom 1 *</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Cognom 1" name="cognom1" value="'.$cognom1.'" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="cognom2">Cognom 2</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Cognom 2" value = "'.$cognom2.'" name="cognom2">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="tipus_document">Tipus document</label>
+                          <div class="input-group">
+                            <select class="form-control form-control-sm" name="tipus_doc">
+                              <option selected> '.$tipus_doc.' </option>
+                              <option>DNI</option>
+                              <option>NIE</option>
+                              <option>CIF</option>
+                              <option>Altres</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                          <label for="numero_document">Nº document *</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Número document" name="num_doc" value = "'.$num_doc.'" $required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="date">Data de naixement *</label>
+                          <input type="date" class="form-control form-control-sm" placeholder="Data naixement" name="data" value = "'.$data_naixement.'" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="sexe">Sexe</label>
+                          <select class="form-control form-control-sm" name="sexe">
+                            <option selected> '.$sexe.' </option>
+                            <option>Home</option>
+                            <option>Dona</option>
+                          </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="tlf">Telèfon de contacte</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Telèfon de contacte" name="tlf" value = "'.$tlf.'">
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                          <label for="email">Correu electrònic *</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Email" name="email" value = "'.$email.'" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="adreca">Adreça *</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Adreça" name="adreca" value = "'.$adreca.'" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="ciutat">Ciutat *</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Ciutat" name="ciutat" value = "'.$ciutat.'" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="provincia">Provincia *</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Provincia" name="provincia" value = "'.$provincia.'" required>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                          <label for="cp">Codi postal *</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Codi postal" name="codi_postal" value = "'.$codi_postal.'" required>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                          <label for="css">Codi de seguretat social *</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Codi Seg Social" name="codi_ss" value = "'.$codi_ss.'" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="cn">Num nomina *</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Num nòmina" name="num_nomina" value = "'.$num_nomina.'" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="iban">IBAN *</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="IBAN" name="iban" value = "'.$iban.'" required>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                          <label for="especialitat">Especialitat *</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Especialitat" name="especialitat" value = "'.$especialitat.'" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="carec">Càrrec *</label>
+                          <input type="text" class="form-control form-control-sm" placeholder="Càrrec" name="carrec" value = "'.$carrec.'" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="rol">Rol *</label>
+                          <select class="form-control form-control-sm" name="rol" required>
+                            <option selected value = "'.$rol.'"> '.$nom_rol.' </option>
+                            <option value="2">Treballador</option>
+                            <option value="3">Gestor</option>
+                          </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="dfi">Horari *</label>
+                          <select class="form-control form-control-sm" name="horari" required>
+                            <option selected value = "'.$horari.'"> '.$torn.' </option>
+                            <option value="1">Matí</option>
+                            <option value="2">Tarda</option>
+                            <option value="3">Nit</option>
+                          </select>
+                        </div>
+                      </div>
+                        <div class="form-row">
+                          <div class="col-md-3 mb-3">
+                            <label for="dic">Data inici contracte *</label>
+                            <input type="date" class="form-control form-control-sm" name="data_inici" value = "'.$data_inici.'" required>
+                          </div>
+                          <div class="col-md-3 mb-3">
+                            <label for="dfi">Data fi contracte *</label>
+                            <input type="date" class="form-control form-control-sm" name="data_fi" value = "'.$data_fi.'" required>
+                          </div>
+                        </div>
+                    <!--</form>-->
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>';
+
+
+          if (isset($_POST['modificar'])) {
+
+            $empleat = new Empleat();
+            $empleat->modificar_empleat($connection);
           }
-          if ($accessibilitat == 0) {
-            $mostrarAccessibilitat = "No";
+
+          /*Modal d'eliminar*/
+            echo '<!-- Modal -->
+          <div class="modal fade" id="modalEliminar'.$id_empleat.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Empleat</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <div class="form-group row">
+                      <label for="example-text-input" class="col-form-label">Segur que vols eliminar a "'.$nom.' '.$cognom1.' '.$cognom2.'" ?</label>
+                   </div>
+                  </div>
+              </div>
+              <form method="post">
+              <div class="col-10">
+                <input class="form-control" type="text" value="'.$id_empleat.'" id="example-text-input" name="id_empleat" style="display: none;">
+              </div>
+                <div class="modal-footer">
+                  <input type="submit" name= "confirmacio" class="btn btn-primary" value="Sí" >
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>';
           }
-          if ($acces_express == 1) {
-            $mostrarAcces_express = "Si";
-          }
-          if ($acces_express == 0) {
-            $mostrarAcces_express = "No";
-          }*/
-          echo '  <tbody>';
-          echo '    <tr>';
-          echo '      <th scope="row">'.$row["id_usuari"].'</th>';
-          echo '      <td>'.$row["nom"].'</td>';
-          echo '      <td>'.$row["cognom1"].'</td>';
-          echo '      <td>'.$row["cognom2"].'</td>';
-          echo '      <td>'.$row["numero_document"].'</td>';
-          /*echo '      <td>'.$row["altura_max"].'</td>';
-          echo '      <td>'.$mostrarAccessibilitat.'</td>';
-          echo '      <td>'.$mostrarAcces_express.'</td>';
-          echo '      <td>'.$row["data_creacio_registre"].'</td>';*/
-          echo'     <td><input type="checkbox" class="form-check-input" name="seleccio_empleat[]" value="'.$id_empleat.'">
-                          </td>';
-          echo '    </tr>';
-          echo '  </tbody>';
+
+        if (isset($_POST['confirmacio'])) {
+          $empleat = new Empleat();
+          $empleat->eliminar_empleat($connection);
         }
-      //  echo'</form>';
       }
-          echo '</table>';
-          $conexio->close();
+    }catch(Exception $error){
+      echo $error;
+      $connection->close();
+      $sentencia->close();
+      return false;
+    }
+    echo '</table>';
+  }
+  /**Mètode per a modificar les dades*/
+  public function modificar_empleat($connection){
+
+    $id_empleat = $_POST['id_empleat'];
+    $nom = $_POST['nom'];
+    $cognom1 = $_POST['cognom1'];
+    $cognom2 = $_POST ['cognom2'];
+    $num_doc = $_POST["nom"];
+    $tipus_doc = $_POST["tipus_doc"];
+    $tlf = $_POST["tlf"];
+    $email = $_POST["email"];
+    $adreca = $_POST["adreca"];
+    $ciutat = $_POST["ciutat"];
+    $provincia = $_POST["provincia"];
+    $codi_postal = $_POST["codi_postal"];
+    $codi_ss = $_POST["codi_ss"];
+    $num_nomina = $_POST["num_nomina"];
+    $iban = $_POST["iban"];
+    $especialitat = $_POST["especialitat"];
+    $carrec = $_POST["carrec"];
+    $sexe = $_POST["sexe"];
+    $data_naixement = $_POST["data"];
+    $rol = $_POST["rol"];
+    $data_inici = $_POST["data_inici"];
+    $data_fi = $_POST["data_fi"];
+    $horari = $_POST["horari"];
+
+    $sql_update = "UPDATE USUARI JOIN DADES_EMPLEAT ON USUARI.id_dades_empleat = DADES_EMPLEAT.id_dades_empleat
+                        LEFT JOIN HORARI ON HORARI.id_horari = DADES_EMPLEAT.id_horari
+                        LEFT JOIN ROL ON ROL.id_rol = USUARI.id_rol
+                        SET USUARI.nom='$nom', USUARI.cognom1='$cognom1', USUARI.cognom2='$cognom2', USUARI.tipus_document = '$tipus_doc', USUARI.telefon = '$tlf',
+                        USUARI.email = '$email', USUARI.adreca = '$adreca', USUARI.ciutat='$ciutat', USUARI.provincia='$provincia', USUARI.codi_postal='$provincia',
+                        USUARI.codi_postal='$codi_postal', DADES_EMPLEAT.codi_seg_social='$codi_ss', DADES_EMPLEAT.num_nomina='$num_nomina', DADES_EMPLEAT.IBAN='$iban', DADES_EMPLEAT.especialitat='$especialitat',
+                        DADES_EMPLEAT.carrec='$carrec', USUARI.sexe='$sexe', USUARI.data_naixement='$data_naixement', USUARI.id_rol='$rol', DADES_EMPLEAT.data_inici_contracte='$data_inici',
+                        DADES_EMPLEAT.data_fi_contracte = '$data_fi', DADES_EMPLEAT.id_horari='$horari' WHERE USUARI.id_usuari='$id_empleat'";
+                        var_dump($sql_update);
+
+
+
+      if (mysqli_query($connection, $sql_update)) {
+          echo "<script>window.location.href='llistarEmpleat.php';</script>";
+          echo "Okay";
+      } else {
+          echo "Error updating record: " . mysqli_error($connection);
+      }
+  }
+
+  /**Mètode per a eliminar*/
+  public function eliminar_empleat($connection){
+    $id_empleat = $_POST['id_empleat'];
+    $sql_delete = "DELETE FROM USUARI WHERE id_usuari=$id_empleat";
+      if (mysqli_query($connection, $sql_delete)) {
+          echo "<script>window.location.href='llistarEmpleat.php';</script>";
+          echo "Okay";
+      } else {
+          echo "Error updating record: " . mysqli_error($connection);
+      }
   }
 }
  ?>

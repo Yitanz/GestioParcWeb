@@ -63,18 +63,18 @@ if($_SESSION['rol'] != 3) {
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" aria-expanded="false" href="#submenu0">
+                <a class="nav-link active" data-toggle="collapse" aria-expanded="false" href="#submenu0">
                   <span data-feather="users"></span>
                   Gestionar Empleats
                   <span data-feather="chevron-right"></span>
                 </a>
               </li>
-              <ul class="nav flex-column collapse" id="submenu0" data-parent="#sidebar">
+              <ul class="nav flex-column collapse show" id="submenu0" data-parent="#sidebar">
                 <li class="nav-item">
                   <a class="nav-link nav-interior" href="../gestioEmpleat/crearEmpleat.php"><span data-feather="user-plus"></span>Crear Empleat</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-interior" href="#"><span data-feather="file-text"></span>Llistar Empleats</a>
+                  <a class="nav-link nav-interior active" href="../gestioEmpleat/llistarEmpleat.php"><span data-feather="file-text"></span>Llistar Empleats</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link nav-interior" href="#"><span data-feather="edit"></span>Modificar Empleat</a>
@@ -85,24 +85,24 @@ if($_SESSION['rol'] != 3) {
               </ul>
 
               <li class="nav-item">
-                <a class="nav-link active" data-toggle="collapse" aria-expanded="true" href="#submenu1">
+                <a class="nav-link" data-toggle="collapse" aria-expanded="true" href="#submenu1">
                   <span data-feather="users"></span>
-                  Gestionar Empleats <span class="sr-only">(current)</span>
+                  Gestionar Clients <span class="sr-only">(current)</span>
                   <span data-feather="chevron-right"></span>
                 </a>
               </li>
-              <ul class="nav flex-column collapse show" id="submenu1" data-parent="#sidebar">
+              <ul class="nav flex-column collapse" id="submenu1" data-parent="#sidebar">
                 <li class="nav-item">
-                  <a class="nav-link nav-interior" href="crearClient.php"><span data-feather="user-plus"></span>Crear Client</a>
+                  <a class="nav-link nav-interior" href="../client/crearClient.php"><span data-feather="user-plus"></span>Crear Client</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-interior active" href="llistarClients.php"><span data-feather="file-text"></span>Llistar Clients</a>
+                  <a class="nav-link nav-interior" href="../client/llistarClients.php"><span data-feather="file-text"></span>Llistar Clients</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-interior" href="#"><span data-feather="edit"></span>Modificar Client</a>
+                  <a class="nav-link nav-interior" href="../client/llistarClients.php"><span data-feather="edit"></span>Modificar Client</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-interior" href="#"><span data-feather="user-minus"></span>Eliminar Client</a>
+                  <a class="nav-link nav-interior" href="../client/llistarClients.php"><span data-feather="user-minus"></span>Eliminar Client</a>
                 </li>
               </ul>
 
@@ -219,7 +219,7 @@ if($_SESSION['rol'] != 3) {
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Llistar Clients Actius</h1>
+            <h1 class="h2">Llistar Empleats Actius</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                 <button class="btn btn-sm btn-outline-secondary">

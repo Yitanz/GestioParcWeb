@@ -67,9 +67,8 @@ class Zona {
           echo '<tbody>';
           echo  '<tr>';
           echo   '<th scope="row">'.$row["nom_zona_parc"].'</th>';              //th es lo "principal", pueden haber 'td' "dentro" de th
-          echo   '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalModificar'.$this->id_zona.'">Modificar</button></td>"';
-          echo   '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEliminar'.$this->id_zona.'">Eliminar</button></td>"';
-          echo   '<br>';
+          echo   '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalModificar'.$this->id_zona.'">Modificar</button></td>';
+          echo   '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEliminar'.$this->id_zona.'">Eliminar</button></td>';
           echo  '</tr>';
           echo '</tbody>';
 
@@ -198,5 +197,73 @@ class Zona {
   function setNom($nom){
     $this->nom = $nom;
   }
+
+  public static function llistatZonaPDF(){
+    require_once $_SERVER['DOCUMENT_ROOT']."/php/fpdf/fpdf.php";
+    $connection = crearConnexio();
+
+    $sql = "SELECT * FROM ZONA_PARC";
+
+    $result = $connection->query($sql);
+    $num_zona = $result->num_rows;
+
+    $columna_id_zona_parc="";
+    $columna_nom_zona_parc="";
+
+    if($result->num_rows > 0){
+      while($row = $result->fetch_assoc()) {
+        $idZ = $row['id_zona_parc'];
+        $nomZ = $row['nom_zona_parc'];
+
+        $columna_id_zona_parc = $columna_id_zona_parc.$idZ."\n";
+        $columna_nom_zona_parc = $columna_nom_zona_parc.$nomZ."\n";
+      }
+    } else {
+      echo " Error: 0 Resultats";
+    }
+    $connection->close();
+
+
+  /*PDF GENERACIÓ*/
+  $pdf = new FPDF();
+  $pdf->AddPage();
+
+        //Fields Name position
+      $Y_Fields_Name_position = 20;
+      //Table position, under Fields Name
+      $Y_Table_Position = 26;
+      //First create each Field Name
+      //Gray color filling each Field Name box
+      $pdf->SetFillColor(232,232,232);
+      //Bold Font for Field Name
+      $pdf->SetFont('Arial','B',12);
+      $pdf->SetY($Y_Fields_Name_position);
+      $pdf->SetX(45);
+      $pdf->Cell(20,6,'ID',1,0,'L',1);
+      $pdf->SetX(65);
+      $pdf->Cell(100,6,'NOM',1,0,'L',1);
+      $pdf->Ln();
+      //Now show the 3 columns
+      $pdf->SetFont('Arial','',12);
+      $pdf->SetY($Y_Table_Position);
+      $pdf->SetX(45);
+      $pdf->MultiCell(20,6,$columna_id_zona_parc,1);
+      $pdf->SetY($Y_Table_Position);
+      $pdf->SetX(65);
+      $pdf->MultiCell(100,6,$columna_nom_zona_parc,1);
+      //Create lines (boxes) for each ROW (Product)
+      //If you don't use the following code, you don't create the lines separating each row
+      $i = 0;
+      $pdf->SetY($Y_Table_Position);
+      while ($i < $num_zona)
+      {
+          $pdf->SetX(45);
+          $pdf->MultiCell(120,6,'',1);
+          $i = $i +1;
+      }
+      //Donem nom al document PDF i l'enviem per descarregar
+      $pdf->Output('llistatZones.pdf','D');
+
+}
 }
 ?>

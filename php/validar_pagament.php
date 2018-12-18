@@ -2,30 +2,66 @@
 include_once("connection.php");
 //session_start();
 include_once("class/cart.php");
+$connection = crearConnexio();
 $cart = new Cart;
-//if($cart->total_items() > 0){
-	foreach($cartItems as $item){
+$cartItems = $cart->contents();
+//var_dump($_SESSION);
+//
 
-  var_dump($item['name']);
-    var_dump($_SESSION['id_usuari']);
-    $activitat=1;
-    $connection = crearConnexio();
-//	if ($item["name"].contains ("Entrada")){
-    $sql="INSERT INTO venta_ticket (id_tipus_ticket, id_usauri, actiu) VALUES (?,?,?);";
-    $resultat = $connection->prepare($sql);
 
-    if($resultat == false){
-      var_dump($resultat);
-    }
-    $resultat2 = $resultat->bind_param('sii', $item['name'], $_SESSION['id_usuari'],$activitat);
 
-    if($resultat2 == false){
-      var_dump($resultat);
-    }
 
-    $execua = $resultat->execute();
-    if($execua == false){
-      var_dump($resultat);
-    }
-//	}
+
+$sql_venta = "INSERT INTO VENTA_PRODUCTS (id_usuari, actiu) VALUES (?,?);";
+$sentencia_venta = $connection->prepare($sql_venta);
+if($sentencia_venta == false){
+	die("Secured1");
 }
+$id_usuari = $_SESSION['id_usuari'];
+$actiu = 1;
+$sentencia_venta->bind_param("ii", $id_usuari, $actiu);
+if($sentencia_venta == false){
+	die("Secured");
+}
+$result = $sentencia_venta->execute();
+$ultim_id = $connection->insert_id;
+if($result==false){
+	die("Secured");
+}
+
+
+/*
+
+$query = $connection->query("SELECT * FROM VENTA_PRODUCTS");
+		while ($row = $query->fetch_assoc()) {
+			$test1 = $row['id_venta_ticket'];
+
+		}
+		var_dump($test1);
+		*/
+foreach($cartItems as $item){
+	$id_producte=$item["id"];
+	$nom=$item["name"];
+	$preu=$item["price"];
+	$cuantitat=$item["qty"];
+	$total_preu=$item["subtotal"];
+
+$sql = "INSERT INTO LINIA_VENTA (id_venta, product, quanititat	) VALUES (?,?,?);";
+
+$sentencia = $connection->prepare($sql);
+if($sentencia == false){
+	die("Secured");
+}
+$sentencia->bind_param("iii", $ultim_id,$id_producte,$cuantitat);
+if($sentencia == false){
+	die("Secured");
+}
+$resultat2 = $sentencia->execute();
+if($resultat2 == false){
+	die("Secured");
+}
+}
+//var_dump($id_producte);
+
+
+?>

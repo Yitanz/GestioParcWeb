@@ -19,8 +19,8 @@
 <body>
 <?php
 session_start();
-$_SESSION['rol'] = 9999;
-$_SESSION['id_usuari'] = 9999; 
+//$_SESSION['rol'] = 9999;
+//$_SESSION['id_usuari'] = 9999;
 //var_dump($_SESSION);
 if ($_SESSION['rol']==1 ) :?>
 
@@ -44,12 +44,12 @@ if ($_SESSION['rol']==1 ) :?>
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle " id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="/perfil.php"><?php echo $_SESSION['username']?></a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="perfil/perfil_client.php">Perfil</a></li>
+            <li><a class="dropdown-item" href="perfil.php">Perfil</a></li>
             <li><a class="dropdown-item" href="logout.php">Tancar Sessio</a></li>
           </ul>
         </li>
           <li>
-            <button type="button" class="btn btn-default btn-sm" onclick="window.location.href='cistella/clases/carrito.php'">
+            <button type="button" class="btn btn-default btn-sm" onclick="window.location.href='/php/viewCart.php'">
               <img src="img/carrito.png">
             </button>
           </li>
@@ -244,7 +244,7 @@ if ($_SESSION['rol']==3 ) :?>
 
 <?php endif ?>
 
-<?php if($_SESSION['rol']==9999) :
+<?php if(!isset($_SESSION['rol'])) :
   var_dump($_SESSION)?>
   <nav class="navbar navbar-expand-sm py-0">
     <div class="collapse navbar-collapse flex-row-reverse" id="collapsibleNavbar">

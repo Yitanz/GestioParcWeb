@@ -168,11 +168,11 @@ if($_SESSION['rol'] != 3) {
                   <a class="nav-link nav-interior" href="#"><span data-feather="minus-square"></span>Eliminar Inicidència</a>
                 </li>
               </ul>
-                
-                
-                
-                
-                
+
+
+
+
+
                               <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" aria-expanded="false" href="#submenu9">
                 <span data-feather="alert-triangle"></span>
@@ -194,8 +194,8 @@ if($_SESSION['rol'] != 3) {
                 <a class="nav-link nav-interior" href="#"><span data-feather="user-minus"></span>Eliminar Noticia</a>
               </li>
             </ul>
-              
-                
+
+
 
               <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" aria-expanded="false" href="#submenu6">
@@ -234,7 +234,6 @@ if($_SESSION['rol'] != 3) {
           include_once("../../php/class/class_client.php");
 
           //$client = new Client();
-
           Client::llistar_client();
 
 

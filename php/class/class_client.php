@@ -18,10 +18,8 @@ class Client {
   private $telefon;
   private $id_rol;
   private $actiu;
-  private $hash;
-
+  private $hash_validacio;
 //constructor
-
   function __construct() {
     $args = func_get_args();
     $num = func_num_args();
@@ -30,20 +28,14 @@ class Client {
       call_user_func_array(array($this,$f),$args);
     }
   }
-
-
   function __construct0()
   {
-
   }
-
-  function __construct2($email, $pass)
+  function __construct2($email, $contrasenya)
   {
     $this->email = $email;
-    $this->pass = $pass;
+    $this->contrasenya = $contrasenya;
   }
-
-
 function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,$ciutat,$provincia,$cp,$tipus_document,$numero_document,$sexe,$telefon){
   $this->nom = $nom;
   $this->cognom1 = $cognom1;
@@ -64,132 +56,113 @@ function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,
   $this->hash = md5(rand(0,1000));
 }
 //rip consturctor
-
   function getNom(){
     return $nom;
   }
   function setNom($nom){
       $this->nom = $nom;
   }
-
   function getCognom1(){
     return $cognom1;
   }
   function setCognom1($cognom1){
       $this->cognom1 = $cognom1;
   }
-
   function getCognom2(){
     return $cognom2;
   }
   function setCognom2($cognom2){
       $this->cognom2 = $cognom2;
   }
-
   function getEmail(){
     return $email;
   }
   function setEmail($email){
       $this->email = $email;
   }
-
   function getContrasenya(){
     return $contrasenya;
   }
   function setContrasenya($contrasenya){
       $this->contrasenya = $contrasenya;
   }
-
   function getDate(){
     return $date;
   }
   function setDate($date){
       $this->date = $date;
   }
-
   function getAdreca(){
     return $adreca;
   }
   function setAdreca($adreca){
      $this->adreca = $adreca;
   }
-
   function getCiutat(){
     return $ciutat;
   }
   function setCiutat($ciutat){
       $this->ciutat = $ciutat;
   }
-
   function getProvincia(){
     return $provincia;
   }
   function setProvincia($provincia){
       $this->provincia = $provincia;
   }
-
   function getCP(){
     return $cp;
   }
   function setCP($cp){
       $this->cp = $cp;
   }
-
   function getTipus_document(){
     return $tipus_document;
   }
   function setTipus_document($tipus_document){
       $this->tipus_document = $tipus_document;
   }
-
   function getNumero_document(){
     return $numero_document;
   }
   function setNumero_document($numero_document){
       $this->numero_document = $numero_document;
   }
-
   function getSexe(){
     return $sexe;
   }
   function setSexe($sexe){
     $this->sexe = $sexe;
   }
-
   function getTelefon(){
     return $telefon;
   }
   function setTelefon($telefon){
     $this->telefon = $telefon;
   }
-
   function getId_rol(){
     return $id_rol;
   }
   function setId_rol($id_rol){
       $this->id_rol = $id_rol;
   }
-
   function getActiu(){
     return $actiu;
   }
   function setActiu($actiu){
       $this->actiu = $actiu;
   }
-
   function getID(){
     return $id;
   }
   function setID($id){
     $this->id = $id;
   }
-
-
   function getHash(){
-    return $hash;
+    return $hash_validacio;
   }
-  function setHash($hash){
-    $this->hash = $hash;
+  function setHash($hash_validacio){
+    $this->hash_validacio = $hash_validacio;
   }
 
 
@@ -260,7 +233,7 @@ function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,
     public static function llistar_client(){
       try{
         $connection = crearConnexio();
-        $sql = "SELECT * FROM USUARI";
+        $sql = "SELECT * FROM USUARI WHERE id_rol=1";
         $resultat = $connection->query($sql);
         echo '<table class="table table-bordered table-sm">';
         echo '<thead>';
@@ -297,6 +270,7 @@ function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,
             $numero_document = $row["numero_document"];
             $sexe = $row["sexe"];
             $telefon = $row["telefon"];
+            $contrasenya = $row["password"];
 
 
             echo '<tbody>';
@@ -314,7 +288,7 @@ function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,
             echo '<td>'.$row["numero_document"].'</td>';
             echo '<td>'.$row["sexe"].'</td>';
             echo '<td>'.$row["telefon"].'</td>';
-            echo '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalModificar'.$id.'"> Modificar</button></td>"';
+            echo '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalModificar'.$id.'"> Modificar</button></td>';
             echo '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalEliminar'.$id.'"> Eliminar<button></td>';
             echo '</tr>';
             echo '</tbody>';
@@ -562,9 +536,6 @@ echo '<!-- Modal -->
     provincia='$provincia_mod',codi_postal='$cp_mod',tipus_document='$tipus_document_mod',
     numero_document='$numero_document_mod',sexe='$sexe_mod',telefon='$telefon_mod' WHERE id_usuari=$id_mod";
 
-    $sql = "SELECT count(id_taula) AS taulaBuida FROM TAULA WHERE AND NOT EXISTS (SELECT id_taula FROM RESERVA_TAULA
-           WHERE ((TAULA.id_taula = RESERVA_TAULA.id_taula AND RESERVA_TAULA.data_reserva = '$dataHora')))";
-
     if (mysqli_query($connection, $sql)) {
         echo '<script>window.location.href = window.location.href + "?negativet";</script>';
         echo "<p> Okay </p>";
@@ -621,7 +592,7 @@ echo '<!-- Modal -->
 
       //$stmt->fetch();
 
-      $isValid = password_verify($this->password, $hash);
+      $isValid = password_verify($this->contrasenya, $hash);
       //$isValid = true;
       if ($isValid)
       {
@@ -694,6 +665,65 @@ echo '<!-- Modal -->
             echo '';
         }
         $conn->close();
+      }
+      catch (Exception $e) {
+        echo 'Error al realitzar la consulta.';
+      }
+
+  }
+  	  public static function omplirDades($email)
+  {
+    try {
+        $connection = crearConnexio();
+
+        if ($connection->connect_error) {
+            die("Connexió fallida: " . $connection->connect_error);
+        }
+
+        $sql = "SELECT nom, cognom1, cognom2, telefon, email FROM USUARI WHERE email='$email'";
+
+        $result = $connection->query($sql);
+
+        if(!$result) {
+          throw new Exception();
+        }
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $nom = $row['nom'];
+                $cognom1 = $row['cognom1'];
+                $cognom2 = $row['cognom2'];
+                $telefon = $row['telefon'];
+                $email = $row['email'];
+
+                echo '
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" class="form-control" name="nom"id="exampleInputText1" value='.$nom.' required>
+                </div>
+                <div class="form-group">
+                  <label>Primer cognom</label>
+                  <input type="text" class="form-control" name="cognom1" id="exampleInputText1" value='.$cognom1.' required>
+                </div>
+                <div class="form-group">
+                  <label>Segon cognom</label>
+                  <input type="text" class="form-control" name="cognom2" id="exampleInputText1" value='.$cognom2.'>
+                </div>
+                <div class="form-group">
+                  <label>Número de telèfon</label>
+                  <input type="text" class="form-control" name="telefon" id="exampleInputText1" value='.$telefon.' >
+                </div>
+                <div class="form-group">
+                  <label>Adreça de correu electrònic</label>
+                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value='.$email.' required>
+                  <small id="emailHelp" class="form-text text-muted">No compartirem el teu email amb ningú.</small>
+                </div>
+                ';
+            }
+        } else {
+            echo '';
+        }
+        $connection->close();
       }
       catch (Exception $e) {
         echo 'Error al realitzar la consulta.';

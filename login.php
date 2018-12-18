@@ -33,7 +33,7 @@ if (!empty($_POST)) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="img/icon.png">
+    <link rel="icon" href="/img/icon.png">
 
     <title>Parc Atraccions Univeylandia</title>
 
@@ -59,9 +59,9 @@ if (!empty($_POST)) {
         }
         ?>>
         <label>Recordar usuari</label>
-        <label><a href="#">Has oblidat la contrasenya?</label>
+        <label><a href="#">Has oblidat la contrasenya?</a></label>
           <br>
-        <label><a href="registre.php">No tens compte? REGISTRAT</label>
+        <label><a href="registre.php">No tens compte? REGISTRAT</a></label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sessio</button>
       <button class="btn btn-md btn-secondary btn-block" type="reset" onclick="history.back()">Tornar enrere</button>

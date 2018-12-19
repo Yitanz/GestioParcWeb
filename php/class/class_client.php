@@ -19,7 +19,9 @@ class Client {
   private $id_rol;
   private $actiu;
   private $hash_validacio;
-//constructor
+  /**
+  * Mètode constructor sense pas de parametres
+  */
   function __construct() {
     $args = func_get_args();
     $num = func_num_args();
@@ -28,14 +30,26 @@ class Client {
       call_user_func_array(array($this,$f),$args);
     }
   }
+  /**
+  * Mètode constructor sense pas de parametres
+  */
   function __construct0()
   {
   }
+  /**
+  * Mètode constructor amb pas de dos parametres
+  * @param $email, $constrasenya
+  */
   function __construct2($email, $contrasenya)
   {
     $this->email = $email;
     $this->contrasenya = $contrasenya;
   }
+
+  /**
+  * Mètode constructor amb pas de 14 parametres
+  *@param $nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,$ciutat,$provincia,$cp,$tipus_document,$numero_document,$sexe,$telefon
+  */
 function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,$ciutat,$provincia,$cp,$tipus_document,$numero_document,$sexe,$telefon){
   $this->nom = $nom;
   $this->cognom1 = $cognom1;
@@ -55,7 +69,7 @@ function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,
   $this->actiu = 0;
   $this->hash = md5(rand(0,1000));
 }
-//rip consturctor
+/*Getters i setters*/
   function getNom(){
     return $nom;
   }
@@ -167,10 +181,11 @@ function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,
 
 
 
-//fi get i setTelefon
 
-
-//inserir
+  /**
+  * Mètode per a inserir clients en la base de dades
+  * @return boolean
+  */
   public function inserir_client(){
     try {
       $connection = crearConnexio();
@@ -205,6 +220,9 @@ function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,
       }
     }
 
+    /**
+    * Mètode per a enviar un email a un client per validar el compte
+    */
     public function validar_client(){
       ini_set( 'display_errors', 1 );
       error_reporting( E_ALL );
@@ -224,12 +242,14 @@ function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,
       if($envia){
         echo "Revisa el teu correu i valida el compte";
       }else {
-        echo "rip";
+        echo "Ha hagut un error.";
       }
 
     }
 
-
+    /**
+    * Mètode que imprimeix codi html per llistar els clients (i modificar-los i eliminar-los)
+    */
     public static function llistar_client(){
       try{
         $connection = crearConnexio();
@@ -464,7 +484,7 @@ function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,
           </div>
         </div>';
 
-//modal de suprimir
+/*modal de suprimir*/
 echo '<!-- Modal -->
         <div class="modal fade" id="ModalEliminar'.$id.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -511,6 +531,9 @@ echo '<!-- Modal -->
 
       }
   }
+  /**
+  * Mètode per a modificar les dades d'un client
+  */
   public function modificar_client()
   {
     $connection = crearConnexio();
@@ -545,6 +568,9 @@ echo '<!-- Modal -->
     $connection->close();
   }
 
+  /**
+  * Mètode per eliminar un client
+  */
   public static function eliminar_client(){
     $connection = crearConnexio();
     $id_sup = $_POST['id_mod_sup'];
@@ -560,7 +586,9 @@ echo '<!-- Modal -->
 
   }
 
-
+  /**
+  * Mètode per a validar el login
+  */
     public function validarLogin()
     {
       $connection = crearConnexio();
@@ -628,6 +656,9 @@ echo '<!-- Modal -->
       $connection->close();
     }
 
+    /**
+    * Mètode per a cercar les dades d'un client
+    */
 	  public static function cercarDadesClient($email)
   {
     try {

@@ -99,7 +99,6 @@ class Ticket {
 
 /**
  * Mètode per a crear tickets
- * @return [type] [description]
  */
       public function crear_ticket(){
         try {
@@ -135,7 +134,6 @@ class Ticket {
 
 /**
  * Mètode per a llistar tickets
- * @return [type] [description]
  */
     public function llistar_ticket(){
       try {
@@ -280,7 +278,6 @@ class Ticket {
 /**
  * Mètode per a modificar tickets
  * @param  [type] $connection [description]
- * @return [type]             [description]
  */
 public function modificar_ticket($connection){
 $id_ticket = $_POST['id_ticket'];
@@ -301,7 +298,6 @@ $sql_update = "UPDATE TICKET SET id_tipus_ticket='$id_tipus_ticket',id_tipus_lin
 /**
    * Mètode per a donar de baixa un ticket
    * @param  [type] $connection [description]
-   * @return [type]             [description]
    */
   public function baixa_ticket($connection){
     $id_ticket = $_POST['id_ticket'];
@@ -320,7 +316,7 @@ $sql_update = "UPDATE TICKET SET id_tipus_ticket='$id_tipus_ticket',id_tipus_lin
   }
 
   public function afegirCistella3(){
-    
+
   }
 }
  ?>

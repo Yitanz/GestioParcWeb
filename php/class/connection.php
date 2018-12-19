@@ -1,5 +1,4 @@
 <?php
-
 function crearConnexio(){
   $server = "localhost";
   $usuari = "root";

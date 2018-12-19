@@ -10,7 +10,7 @@ class Incidencia {
     private $id_usuari_client;
     private $id_usuari_empleat;
 
-  /**Constructor sense res*/
+  /**Constructor sense pas de parametres*/
   function __construct() {
       $args = func_get_args();
       $num = func_num_args();
@@ -20,7 +20,10 @@ class Incidencia {
       }
     }
 
-  /**Constructor amb dos parametres*/
+  /**
+  *Constructor amb set parametres
+  * @param $titol_incidencia_parc, $descripcio_incidencia_parc, $prioritat_incidencia_parc, $data_inici_incidencia_parc, $data_fi_incidencia_parc
+  */
   function __construct7($titol_incidencia_parc, $descripcio_incidencia_parc, $prioritat_incidencia_parc, $data_inici_incidencia_parc, $data_fi_incidencia_parc){
     $this->titol_incidencia_parc = $titol_incidencia_parc;
     $this->descripcio_incidencia_parc = $descripcio_incidencia_parc;
@@ -32,7 +35,7 @@ class Incidencia {
     $this->id_usuari_empleat = 5;
   }
 
-  /**Funcio de inserir zones*/
+  /**Mètode de inserir incidencies*/
   public function inserir_incidencia(){
     try {
       $connection = crearConnexio();
@@ -40,7 +43,7 @@ class Incidencia {
       $sentencia = $connection->prepare($sql);
 
       $sentencia->bind_param("sssssiii",$this->titol_incidencia_parc,$this->descripcio_incidencia_parc, $this->prioritat_incidencia_parc, $this->data_inici_incidencia_parc, $this->data_fi_incidencia_parc, $this->id_estat, $this->id_usuari_client, $this->id_usuari_empleat);
-        
+
       if($sentencia->execute()){
         $connection->close();
         $sentencia->close();
@@ -58,7 +61,9 @@ class Incidencia {
       return false;
     }
   }
-
+    /**
+    * Mètode per a validar incidencies
+    */
     public function validar_incidencia(){
           ini_set( 'display_errors', 1 );
           error_reporting( E_ALL );
@@ -66,7 +71,7 @@ class Incidencia {
           echo "Incidencia creada";
         }
 
-  /**Funció per a mostrar els elements de la base de dades*/
+  /**Mètode per a mostrar les incidències de la base de dades*/
   public function llistar_incidencia(){
     try{
       $connection = crearConnexio();
@@ -102,15 +107,15 @@ class Incidencia {
           $this->id_usuari_empleat = $row["id_usuari_empleat"];
           echo '<tbody>';
           echo  '<tr>';
-          echo   '<th scope="row">'.$row["id_incidencia_parc"].'</th>'; 
+          echo   '<th scope="row">'.$row["id_incidencia_parc"].'</th>';
           echo   '<th scope="row">'.$row["titol_incidencia_parc"].'</th>';              //th es lo "principal", pueden haber 'td' "dentro" de th
-          echo   '<th scope="row">'.$row["descripcio_incidencia_parc"].'</th>'; 
-          echo   '<th scope="row">'.$row["prioritat_incidencia_parc"].'</th>'; 
-          echo   '<th scope="row">'.$row["data_inici_incidencia_parc"].'</th>'; 
-          echo   '<th scope="row">'.$row["data_fi_incidencia_parc"].'</th>'; 
-          echo   '<th scope="row">'.$row["id_estat"].'</th>'; 
-          echo   '<th scope="row">'.$row["id_usuari_client"].'</th>'; 
-          echo   '<th scope="row">'.$row["id_usuari_empleat"].'</th>'; 
+          echo   '<th scope="row">'.$row["descripcio_incidencia_parc"].'</th>';
+          echo   '<th scope="row">'.$row["prioritat_incidencia_parc"].'</th>';
+          echo   '<th scope="row">'.$row["data_inici_incidencia_parc"].'</th>';
+          echo   '<th scope="row">'.$row["data_fi_incidencia_parc"].'</th>';
+          echo   '<th scope="row">'.$row["id_estat"].'</th>';
+          echo   '<th scope="row">'.$row["id_usuari_client"].'</th>';
+          echo   '<th scope="row">'.$row["id_usuari_empleat"].'</th>';
           echo   '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalModificar'.$this->id_incidencia_parc.'">Modificar</button></td>"';
           echo   '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEliminar'.$this->id_incidencia_parc.'">Eliminar</button></td>"';
           echo   '<br>';
@@ -263,7 +268,9 @@ class Incidencia {
     echo '</table>';
     $connection->close();
   }
-
+  /**
+  * Mètode per a modificar les dades d'una incidència
+  */
  public function modificar_incidencia($connection){
             $id_incidencia_parc = $_POST['id_incidencia_parc'];
             $titol_incidencia_parc = $_POST['titol_incidencia_parc'];
@@ -283,7 +290,7 @@ class Incidencia {
               }
             }
 
-            /**Mètode per a eliminar una zona*/
+            /**Mètode per a eliminar una incidència*/
             public function eliminar_incidencia($connection){
             $id_incidencia = $_POST['id_incidencia'];
             $sql_delete = "DELETE FROM INCIDENCIA_PARC WHERE id_incidencia_parc=$id_incidencia_parc";

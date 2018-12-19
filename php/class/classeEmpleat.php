@@ -28,6 +28,9 @@ class Empleat {
   private $data_fi;
   private $horari;
   /* CONSTRUCTORS */
+  /**
+  * Mètode constructor sense pas de paràmetres
+  */
   function __construct() {
     $args = func_get_args();
     $num = func_num_args();
@@ -36,12 +39,21 @@ class Empleat {
       call_user_func_array(array($this,$f),$args);
     }
   }
+  /**
+  * Mètode constructor amb pas de dos paràmetres
+  * @param $email, $pass
+  */
   function __construct2($email, $pass)
   {
     $this->email = $email;
     $this->pass = $pass;
   }
   /* CONSTRUCTOR PER A QUAN CREEM UN USUARI DES DE ADMINISTRACIO */
+  /**
+  * Mètode constructor amb pas de 23 paràmetres
+  * @param $nom, $cognom1, $cognom2, $tipus_doc, $num_doc, $data, $sexe, $tlf, $email, $adreca, $ciutat, $provincia, $codi_postal, $pass, $rol, $codi_ss, $num_nomina, $iban, $especialitat, $carrec, $data_inici, $data_fi, $horari
+  */
+
   function __construct23($nom, $cognom1, $cognom2, $tipus_doc, $num_doc, $data, $sexe, $tlf,
   $email, $adreca, $ciutat, $provincia, $codi_postal, $pass, $rol, $codi_ss, $num_nomina, $iban, $especialitat, $carrec, $data_inici, $data_fi, $horari) {
    $this->id_empleat = NULL;
@@ -70,6 +82,9 @@ class Empleat {
    $this->data_fi = $data_fi;
    $this->horari = $horari;
   }
+  /**
+  * Mètode per a crear empleats
+  */
   public function crearEmpleat()
   {
     try
@@ -128,6 +143,9 @@ class Empleat {
       throw $e;
     }
   }
+  /**
+  * Mètode per a validar el login
+  */
   public function validarLogin()
   {
     $connection = crearConnexio();
@@ -177,6 +195,9 @@ class Empleat {
     }
     $connection->close();
   }
+  /**
+  * Mètode per a llistar usuaris amb búsqueda
+  */
   public static function SelecciollistarUsuarisBusqueda(){
   $connection = crearConnexio();
   //if ($conexio->connect_error)
@@ -229,7 +250,9 @@ class Empleat {
   }
 
 
-
+  /**
+  * Mètode que imprimeix codi html (amb echo) per a mostrar els usuaris, donant opció a modificar i eliminar
+  */
   public static function SelecciollistarUsuaris(){
       try{
       $connection = crearConnexio();
@@ -548,7 +571,7 @@ class Empleat {
       }
   }
 
-  /**Mètode per a eliminar*/
+  /**Mètode per a eliminar un empleat*/
   public function eliminar_empleat($connection){
     $id_empleat = $_POST['id_empleat'];
     $sql_delete = "DELETE FROM USUARI WHERE id_usuari=$id_empleat";

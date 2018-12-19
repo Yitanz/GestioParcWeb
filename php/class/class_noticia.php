@@ -6,8 +6,9 @@
       private $data_noticia;
       private $id_usuari;
 
-    //constructor
-
+      /**
+      * Mètode constructor
+      */
       function __construct() {
         $args = func_get_args();
         $num = func_num_args();
@@ -16,21 +17,25 @@
           call_user_func_array(array($this,$f),$args);
         }
       }
-
+      /**
+      * Mètode constructor
+      */
       function __construct0()
       {
 
       }
 
-
+      /**
+      * Mètode constructor amb pas de 3 paràmetres
+      *@param $titol_noticia,$descripcio_noticia,$data_noticia
+      */
     function __construct3($titol_noticia,$descripcio_noticia,$data_noticia){
       $this->titol_noticia = $titol_noticia;
       $this->descripcio_noticia = $descripcio_noticia;
       $this->data_noticia = $data_noticia;
       $this->id_usuari = 2;
     }
-    //rip consturctor
-
+    /*getters i setters*/
       function getTitol_Noticia(){
         return $titol_noticia;
       }
@@ -51,10 +56,11 @@
       function setData_Noticia($data_noticia){
           $this->data_noticia = $data_noticia;
       }
-    //fi get i setTelefon
 
 
-    //inserir
+      /**
+      * Mètode per a inserir noticies en la base de dades
+      */
       public function inserir_noticia(){
         try {
           $connection = crearConnexio();
@@ -105,7 +111,9 @@
           echo "Revisa el teu correu i valida el compte";
         }
         */
-
+        /**
+        * Mètode per a llistar les noticies que hi han en la base de dades (mitjançant codi html, mostra també modificar i eliminar)
+        */
         public function llistar_noticia(){
                   try{
                     $connection = crearConnexio();
@@ -242,12 +250,12 @@
             </div>
           </div>
         </div>';
-                        
+
       if (isset($_POST['confirmacio'])) {
         $noticia = new noticia();
         $noticia->eliminar_noticia($connection);
       }
-    
+
        echo '<!-- Modal -->
         <div class="modal fade" id="modalCrearHTML'.$this->id_noticia.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -285,14 +293,14 @@
             </form>
             </div>
           </div>
-        </div>';   
-        
+        </div>';
+
         if (isset($_POST['aceptar'])) {
         $noticia = new noticia();
         $noticia->arxiu_noticia($connection);
       }
       }
-     }                
+     }
     }catch(Exception $error){
       echo $error;
       $connection->close();
@@ -302,7 +310,9 @@
     echo '</table>';
     $connection->close();
   }
-
+  /**
+  * Mètode per a modificar noticies
+  */
             public function modificar_noticia($connection){
             $id_noticia = $_POST['id_noticia'];
             var_dump($id_noticia);
@@ -319,7 +329,7 @@
               }
             }
 
-            /**Mètode per a eliminar una zona*/
+            /**Mètode per a eliminar una noticia*/
             public function eliminar_noticia($connection){
             $id_noticia = $_POST['id_noticia'];
             $sql_delete = "DELETE FROM NOTICIA WHERE id_noticia=$id_noticia";
@@ -330,14 +340,16 @@
             echo "Error updating record: " . mysqli_error($connection);
             }
         }
-            
+        /**
+        * Mètode que genera una pagina html amb la noticia
+        */
             public function arxiu_noticia($connection){
             $id_noticia = strip_tags($_POST['id_noticia']);
             $titol_noticia = strip_tags($_POST['titol_noticia']);
             $descripcio_noticia = strip_tags($_POST['descripcio_noticia']);
             $data_noticia = strip_tags($_POST['data_noticia']);
-            $nom_arxiu = 'noticia'.$titol_noticia.'.html'; 
-                
+            $nom_arxiu = 'noticia'.$titol_noticia.'.html';
+
             $contingut = "<!DOCTYPE html>
                                             <html lang='en'>
                                             <head>
@@ -499,7 +511,7 @@
                                             </body>
                                             </html>
                                             ";
-                
+
             file_put_contents($nom_arxiu, $contingut );
             }
 

@@ -5,6 +5,7 @@ if (isset($_SESSION['username'])) {
 }
 ?>
 <?php
+/*Comprovem si les dades són correctes i redirigim a l'usuari a la pàgina corresponent amb el seu rol*/
 include_once $_SERVER['DOCUMENT_ROOT']."/php/class/class_client.php";
 
 if (!empty($_POST)) {

@@ -2,6 +2,9 @@
 class Cart {
   protected $cart_contents = array();
 
+/**
+* Constructor sense pas de parametres
+*/
   public function __construct(){
     $this->cart_contents = !empty($_SESSION['cart_contents'])?$_SESSION['cart_contents']:NULL;
     if($this->cart_contents === NULL){
@@ -9,12 +12,10 @@ class Cart {
     }
   }
 
-  /*
-  * Retorna el array complet del carrito
-  * @param bool
+  /**
+  * Retorna el array complet de la cistella
   * @return array
   */
-
   public function contents(){
     //reordena el mes nou primer
     $cart = array_reverse($this->cart_contents);
@@ -27,7 +28,7 @@ class Cart {
   }
 
   /**
-  *Retorna un especific item del carrito
+  *Retorna un especific item de la cistella
   * @param    string    $row_id
   * @return    array
   */
@@ -39,7 +40,7 @@ class Cart {
   }
 
    /**
-     * Total Items: Returns the total item count
+     * Total Items: Retorna el total d'items de la cistella
      * @return    int
      */
     public function total_items(){
@@ -47,7 +48,7 @@ class Cart {
     }
 
     /**
-     * [total description]  Returns the total price
+     *  Retorna el preu total dels items de la cistella
      * @return [type] int [description]
      */
     public function total(){
@@ -96,7 +97,7 @@ class Cart {
     }
 
     /**
-     * Update the cart
+     * Mètode per actualitzar la cistella
      * @param    array
      * @return    bool
      */
@@ -135,7 +136,7 @@ class Cart {
     }
 
     /**
-     * Save the cart array to the session
+     * Mètode per a guardar la cistella en sessió
      * @return    bool
      */
     protected function save_cart(){
@@ -162,7 +163,7 @@ class Cart {
     }
 
     /**
-     * Remove Item: Removes an item from the cart
+     * Remove: Elimina un item de la cistella
      * @param    int
      * @return    bool
      */
@@ -174,7 +175,7 @@ class Cart {
      }
 
     /**
-     * Destroy the cart: Empties the cart and destroy the session
+     * Destroy: buida tot el carret
      * @return    void
      */
     public function destroy(){

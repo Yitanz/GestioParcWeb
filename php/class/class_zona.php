@@ -3,7 +3,7 @@ include_once("connection.php");
 class Zona {
   private $nom;
 
-  /**Constructor sense res*/
+  /**Constructor sense pas de parametres*/
   function __construct() {
       $args = func_get_args();
       $num = func_num_args();
@@ -13,12 +13,15 @@ class Zona {
       }
     }
 
-  /**Constructor amb dos parametres*/
+  /**
+  *Constructor amb un parametre
+  * @param $nom
+  */
   function __construct1($nom){
     $this->nom = $nom;
   }
 
-  /**Funcio de inserir zones*/
+  /**Mètode de inserir zones*/
   public function inserir_zona(){
     try {
       $connection = crearConnexio();
@@ -44,7 +47,7 @@ class Zona {
     }
   }
 
-  /**Funció per a mostrar els elements de la base de dades*/
+  /**Mètode per a mostrar les zones que hi han en la base de dades*/
   public function llistar_zona(){
     try{
       $connection = crearConnexio();
@@ -197,7 +200,9 @@ class Zona {
   function setNom($nom){
     $this->nom = $nom;
   }
-
+  /**
+  * Mètode per a llistar les zones en un arxiu .PDF
+  */
   public static function llistatZonaPDF(){
     require_once $_SERVER['DOCUMENT_ROOT']."/php/fpdf/fpdf.php";
     $connection = crearConnexio();

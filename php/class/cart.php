@@ -1,7 +1,9 @@
 <?php session_start();
 class Cart {
   protected $cart_contents = array();
-
+  /**
+  * Mètode constructor
+  */
   public function __construct(){
     $this->cart_contents = !empty($_SESSION['cart_contents'])?$_SESSION['cart_contents']:NULL;
     if($this->cart_contents === NULL){
@@ -9,12 +11,11 @@ class Cart {
     }
   }
 
-  /*
+  /**
   * Retorna el array complet del carrito
   * @param bool
   * @return array
   */
-
   public function contents(){
     //reordena el mes nou primer
     $cart = array_reverse($this->cart_contents);
@@ -39,7 +40,7 @@ class Cart {
   }
 
    /**
-     * Total Items: Returns the total item count
+     * Retorna la quantitat total dels items de la cistella
      * @return    int
      */
     public function total_items(){
@@ -47,7 +48,7 @@ class Cart {
     }
 
     /**
-     * [total description]  Returns the total price
+     *  Retorna el preu total dels articles de la cistella
      * @return [type] int [description]
      */
     public function total(){
@@ -55,7 +56,7 @@ class Cart {
     }
 
     /**
-     * Insert items into the cart and save it to the session
+     * Inserta items en la cistella i ho guarda ens sessió
      * @param    array
      * @return    bool
      */
@@ -96,7 +97,7 @@ class Cart {
     }
 
     /**
-     * Update the cart
+     * Actualitza la cistella
      * @param    array
      * @return    bool
      */
@@ -135,7 +136,7 @@ class Cart {
     }
 
     /**
-     * Save the cart array to the session
+     * Gurda l'array de la cistella en sessió
      * @return    bool
      */
     protected function save_cart(){
@@ -162,7 +163,7 @@ class Cart {
     }
 
     /**
-     * Remove Item: Removes an item from the cart
+     * Elimina un item de la cistella
      * @param    int
      * @return    bool
      */
@@ -174,7 +175,7 @@ class Cart {
      }
 
     /**
-     * Destroy the cart: Empties the cart and destroy the session
+     * Buida la cistella
      * @return    void
      */
     public function destroy(){

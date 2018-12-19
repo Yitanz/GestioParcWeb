@@ -83,6 +83,8 @@
 //        if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && &&!empty($_GET['hash'])){
           //verificar
         //  echo 'rip';
+
+        /*Validem el compte de l'usuari (canviem actiu a 1)*/
           $email = $_GET['email'];// guardar a variable
           var_dump($email);
           $hash = $_GET['hash'];

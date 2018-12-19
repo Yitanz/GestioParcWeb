@@ -33,11 +33,23 @@
 			 document.getElementById('pedido').innerHTML = roba_triat;
     }
 
+		function eliminar_ultim(tot_preu, i, j, pedido){
+			if(resultat > 0){
+				resultat = resultat - tot_preu[i][j];
+				roba_triat.splice(-1, 1);
+				document.getElementById('preu').innerHTML = resultat;
+				document.getElementById('pedido').innerHTML = roba_triat;
+
+			}else{}
+		}
+
     document.write("<h1> Tenda SPAM, la millor roba </h1>");
     for(i=0; i<pedido.length; i++){
       for(j=0; j<pedido[i].length; j++){
         document.write("<button onclick=\"calcular_preu(tot_preu,"+i+","+j+",pedido)\">"+ pedido [i][j] +"</button>");
-      }
+				document.write("<button onclick=\"eliminar_ultim(tot_preu,"+i+","+j+",pedido)\">Suprimir</button>");
+
+			}
       document.write("<br> <br> <br>");
     }
 

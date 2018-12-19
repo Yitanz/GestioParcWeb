@@ -1,6 +1,27 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/php/connection.php";
 class Client {
+  /**
+    * [Atributs de la clase]
+    * @var [type Int.Guardem l'ID del client.]
+    * @var [type String. Guardem el nom del client.]
+    * @var [type String. Guardem el cognom1 del client.]
+    * @var [type String. Guardem el cognom2 del client.]
+    * @var [type String. Guardem el email del client.]
+    * @var [type String. Guardem la contrasenya.]
+    * @var [type Date. Guardem la data de naixement.]
+    * @var [type String. Guardem l'adreça.]
+    * @var [type String. Guardem la ciutat.]
+    * @var [type String. Guardem la provincia.]
+    * @var [type Int. Guardem el codic postal.]
+    * @var [type String. Guardem el tipus de document.]
+    * @var [type Int. Guardem el numero de document.]
+    * @var [type String. Guardem el sexe del client.]
+    * @var [type Int. Guardem el numero del client.]
+    * @var [type Int. Guardem el rol del client]
+    * @var [type Boolean. Guardem si esta actiu o no el compte.]
+    * @var [type String. Guardem el hash del client.]
+    */
   private $id;
   private $nom;
   private $cognom1;
@@ -19,6 +40,7 @@ class Client {
   private $id_rol;
   private $actiu;
   private $hash_validacio;
+
   /**
   * Mètode constructor sense pas de parametres
   */
@@ -38,18 +60,31 @@ class Client {
   }
   /**
   * Mètode constructor amb pas de dos parametres
-  * @param $email, $constrasenya
+  * @param string
+  * @param string
   */
   function __construct2($email, $contrasenya)
   {
     $this->email = $email;
     $this->contrasenya = $contrasenya;
   }
-
-  /**
-  * Mètode constructor amb pas de 14 parametres
-  *@param $nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,$ciutat,$provincia,$cp,$tipus_document,$numero_document,$sexe,$telefon
-  */
+/**
+ * Constrctor client de creacio
+ * @param  string $nom
+ * @param  string $cognom1
+ * @param  string $cognom2
+ * @param  string $email
+ * @param  string $contrasenya
+ * @param  string $date
+ * @param  string $adreca
+ * @param  string $ciutat
+ * @param  string $provincia
+ * @param  int $cp
+ * @param  string $tipus_document
+ * @param  string $numero_document
+ * @param  string $sexe
+ * @param  int $telefon
+ */
 function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,$ciutat,$provincia,$cp,$tipus_document,$numero_document,$sexe,$telefon){
   $this->nom = $nom;
   $this->cognom1 = $cognom1;
@@ -69,58 +104,130 @@ function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,
   $this->actiu = 0;
   $this->hash = md5(rand(0,1000));
 }
-/*Getters i setters*/
+
+/**
+ * get nom
+ * @return string
+ */
   function getNom(){
     return $nom;
   }
+  /**
+   * set nom
+   * @param  string $nom
+   */
   function setNom($nom){
       $this->nom = $nom;
   }
+  /**
+   * get cognom1
+   * @return string
+   */
   function getCognom1(){
     return $cognom1;
   }
+  /**
+   * set cognom1
+   * @param string $cognom1
+   */
   function setCognom1($cognom1){
       $this->cognom1 = $cognom1;
   }
+  /**
+   * get cognom2
+   * @return string
+   */
   function getCognom2(){
     return $cognom2;
   }
+  /**
+   * set cognom2
+   * @param string $cognom2
+   */
   function setCognom2($cognom2){
       $this->cognom2 = $cognom2;
   }
+  /**
+   * get email
+   * @return string
+   */
   function getEmail(){
     return $email;
   }
+  /**
+   * set email
+   * @param string $email
+   */
   function setEmail($email){
       $this->email = $email;
   }
+  /**
+   * get contrasenya
+   * @return string
+   */
   function getContrasenya(){
     return $contrasenya;
   }
+  /**
+   * set contrasenya
+   * @param string $contrasenya
+   */
   function setContrasenya($contrasenya){
       $this->contrasenya = $contrasenya;
   }
+  /**
+   * get date
+   * @return string
+   */
   function getDate(){
     return $date;
   }
+  /**
+   * set date
+   * @param string $date
+   */
   function setDate($date){
       $this->date = $date;
   }
+  /**
+   * get adreça
+   * @return string
+   */
   function getAdreca(){
     return $adreca;
   }
+  /**
+   * set adreça
+   * @param string $adreca
+   */
   function setAdreca($adreca){
      $this->adreca = $adreca;
   }
+  /**
+   * get ciutat
+   * @return string
+   */
   function getCiutat(){
     return $ciutat;
   }
+  /**
+   * set ciutat
+   * @param string $ciutat
+   */
   function setCiutat($ciutat){
       $this->ciutat = $ciutat;
   }
+  /**
+   * get provincia
+   * @return string
+   */
   function getProvincia(){
     return $provincia;
   }
+  /**
+   * [setProvincia description]
+   * @param [type] $provincia [description]
+   */
   function setProvincia($provincia){
       $this->provincia = $provincia;
   }
@@ -183,7 +290,7 @@ function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,
 
 
   /**
-  * Mètode per a inserir clients en la base de dades
+  * @brief Mètode per a inserir clients en la base de dades
   * @return boolean
   */
   public function inserir_client(){
@@ -221,7 +328,7 @@ function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,
     }
 
     /**
-    * Mètode per a enviar un email a un client per validar el compte
+    * @brief Mètode per a enviar un email a un client per validar el compte
     */
     public function validar_client(){
       ini_set( 'display_errors', 1 );
@@ -248,7 +355,8 @@ function __construct14($nom,$cognom1,$cognom2,$email,$contrasenya,$date,$adreca,
     }
 
     /**
-    * Mètode que imprimeix codi html per llistar els clients (i modificar-los i eliminar-los)
+    * @brief Mètode que imprimeix codi html per llistar els clients (i modificar-los i eliminar-los)
+    * @return [boolean]
     */
     public static function llistar_client(){
       try{
@@ -532,7 +640,7 @@ echo '<!-- Modal -->
       }
   }
   /**
-  * Mètode per a modificar les dades d'un client
+  * @brief Mètode per a modificar les dades d'un client
   */
   public function modificar_client()
   {
@@ -569,7 +677,7 @@ echo '<!-- Modal -->
   }
 
   /**
-  * Mètode per eliminar un client
+  * @brief Mètode per eliminar un client
   */
   public static function eliminar_client(){
     $connection = crearConnexio();
@@ -587,7 +695,7 @@ echo '<!-- Modal -->
   }
 
   /**
-  * Mètode per a validar el login
+  * @brief Mètode per a validar el login
   */
     public function validarLogin()
     {
@@ -656,8 +764,10 @@ echo '<!-- Modal -->
       $connection->close();
     }
 
-    /**
-    * Mètode per a cercar les dades d'un client
+
+   /**
+    * [cercarDadesClient per a cercar les dades del client]
+    * @param  [string] $email
     */
 	  public static function cercarDadesClient($email)
   {
@@ -702,6 +812,10 @@ echo '<!-- Modal -->
       }
 
   }
+  /**
+   * [omplirDades Omplir les dadesd el forumlari de compra]
+   * @param  [string] $email
+   */
   	  public static function omplirDades($email)
   {
     try {

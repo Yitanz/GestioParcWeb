@@ -5,16 +5,10 @@
 		public $product;
 		public $price;
 
-		/**
-		* Mètode constructor
-		*/
 		public function __construct(){
       parent::__construct();
     }
-		/**
-		* Mètode que retorna un String amb codi html amb la informació dels productes
-		* @return $html
-		*/
+
 		public function get_products(){
       $sql = $this->db->query("SELECT * FROM PRODUCTE");
       $html = '';
@@ -37,11 +31,6 @@
       return $html;
    	}
 
-		/**
-		* Mètode per a buscar un producte
-		*@param $code
-		*@return $status
-		*/
  		public function search_code($code){
  			$sql = $this->db->query("SELECT * FROM PRODUCTE WHERE id_producte = '$code'");
       $product = $sql->fetch_all(MYSQLI_ASSOC);

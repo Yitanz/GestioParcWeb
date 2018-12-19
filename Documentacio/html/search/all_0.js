@@ -1,0 +1,13 @@
+var searchData=
+[
+  ['_5f_5fconstruct',['__construct',['../classCart.html#ac81683f41148daccac77a6c2df7742af',1,'Cart\__construct()'],['../classClient.html#a89d6f2e4b44b30eb710170f836fee350',1,'Client\__construct()'],['../classIncidencia.html#aa8d70d318c0db8e277059c582f823453',1,'Incidencia\__construct()'],['../classIncidencia.html#aa8d70d318c0db8e277059c582f823453',1,'Incidencia\__construct()'],['../classnoticia.html#af32c1ca2c9403babfa0e4834bfdd9a76',1,'noticia\__construct()'],['../classTicket.html#a83aa76a51e7a7263f0d919500321daec',1,'Ticket\__construct()'],['../classZona.html#ac77ceed1667240837d5bb833df38cdba',1,'Zona\__construct()'],['../classAtraccio.html#a238c88f3e482c2d7b30950383e11694c',1,'Atraccio\__construct()'],['../classEmpleat.html#a1b3c94de52680481651cfc3773476ef6',1,'Empleat\__construct()'],['../classProduct.html#ad109fb66198f9b631950e276875706cb',1,'Product\__construct()']]],
+  ['_5f_5fconstruct0',['__construct0',['../classClient.html#a3c3458ec634447ec146ce74d39841379',1,'Client\__construct0()'],['../classnoticia.html#a2b1d42fa4f8abe6c5dcfc1e9ec8f8793',1,'noticia\__construct0()']]],
+  ['_5f_5fconstruct1',['__construct1',['../classZona.html#a266d5cb8e9fcef82a38640a7060402ee',1,'Zona']]],
+  ['_5f_5fconstruct14',['__construct14',['../classClient.html#af6ec28cd809819d7168e0ecda6666406',1,'Client']]],
+  ['_5f_5fconstruct2',['__construct2',['../classClient.html#a39d1dd8f59428d0616c106d012bfe4c9',1,'Client\__construct2()'],['../classEmpleat.html#a868bfa25d14fbf9872bbeecf5ad63a4b',1,'Empleat\__construct2()']]],
+  ['_5f_5fconstruct23',['__construct23',['../classEmpleat.html#a745116c6281e518b3cee18f290ea0a88',1,'Empleat']]],
+  ['_5f_5fconstruct3',['__construct3',['../classnoticia.html#abe32b7e264a01c84c5cd58cbc896ab65',1,'noticia']]],
+  ['_5f_5fconstruct4',['__construct4',['../classTicket.html#ae74e03518d658a318ad227f3c67cb7ec',1,'Ticket']]],
+  ['_5f_5fconstruct6',['__construct6',['../classTicket.html#af8964d2eb9358cc502d6808348f976a8',1,'Ticket']]],
+  ['_5f_5fconstruct7',['__construct7',['../classIncidencia.html#acc62c11b7c40a160c417585b4bbed7a0',1,'Incidencia\__construct7($titol_incidencia_parc, $descripcio_incidencia_parc, $prioritat_incidencia_parc, $data_inici_incidencia_parc, $data_fi_incidencia_parc)'],['../classIncidencia.html#a4c2dcd63b9c27d15b0aa77c574d0d1b6',1,'Incidencia\__construct7($titol_incidencia_parc, $descripcio_incidencia_parc, $prioritat_incidencia_parc, $data_inici_incidencia_parc, $data_fi_incidencia_parc, $id_estat, $id_usuari_client, $id_usuari_empleat)'],['../classAtraccio.html#acfc5e7515f83388b2aee016faaeee753',1,'Atraccio\__construct7()']]]
+];

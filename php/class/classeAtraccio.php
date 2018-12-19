@@ -1,7 +1,6 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/php/connection.php";
 class Atraccio{
-  /*Atributs*/ //Faltaran mes Atributs
   private $idAtraccio;
   private $nomAtraccio;
   private $tipusAtraccio;
@@ -11,7 +10,9 @@ class Atraccio{
   private $accessibilitat;
   private $accesExpress;
 
-  /*Constructor*/
+  /**
+   * [__construct comprova constructors]
+   */
   function __construct(){
    $args = func_get_args();
    $num = func_num_args();
@@ -20,7 +21,16 @@ class Atraccio{
      call_user_func_array(array($this,$f),$args);
    }
   }
-
+/**
+ * [__construct7 de 7]
+ * @param  $nomAtraccio
+ * @param   $tipusAtraccio
+ * @param   $dataInauguracio
+ * @param   $alturaMin
+ * @param   $alturaMax
+ * @param   $accessibilitat
+ * @param   $accesExpress
+ */
   public function __construct7($nomAtraccio,$tipusAtraccio,$dataInauguracio,$alturaMin,$alturaMax,$accessibilitat,$accesExpress){
     $this->idAtraccio=NULL;
     $this->nomAtraccio=$nomAtraccio;
@@ -33,7 +43,9 @@ class Atraccio{
 
   }
 
-  /*Getters*/
+  /**
+  *@brief Getters
+  */
   public function getIdAtraccio(){
   return $this->idAtraccio;
   }
@@ -99,6 +111,9 @@ class Atraccio{
     $this->accesExpress=$accesExpress;
   }
 
+/**
+ * [Registrar atraccio]
+ */
   public function Registrar(){
 
       $connection = crearConnexio();
@@ -118,6 +133,7 @@ class Atraccio{
         }
 
   }
+  
   public static function llistarEmpleats(){
 
 

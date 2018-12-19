@@ -1,4 +1,9 @@
 <?php
+/**
+ * @class Empleat
+ * @brief la classe empleat
+ * @author Grup 1: Ferran Climent, Ivan Morte, Marcos Zaballos
+ */
 include_once $_SERVER['DOCUMENT_ROOT']."/php/connection.php";
 class Empleat {
   /*Atributs*/
@@ -49,11 +54,33 @@ class Empleat {
     $this->pass = $pass;
   }
   /* CONSTRUCTOR PER A QUAN CREEM UN USUARI DES DE ADMINISTRACIO */
-  /**
-  * Mètode constructor amb pas de 23 paràmetres
-  * @param $nom, $cognom1, $cognom2, $tipus_doc, $num_doc, $data, $sexe, $tlf, $email, $adreca, $ciutat, $provincia, $codi_postal, $pass, $rol, $codi_ss, $num_nomina, $iban, $especialitat, $carrec, $data_inici, $data_fi, $horari
-  */
-
+/**
+ * Mètode constructor amb pas de 23 paràmetres
+ * @param   $nom
+ * @param   $cognom1
+ * @param   $cognom2
+ * @param   $tipus_doc
+ * @param   $num_doc
+ * @param   $data
+ * @param   $sexe
+ * @param   $tlf
+ * @param   $email
+ * @param   $adreca
+ * @param   $ciutat
+ * @param   $provincia
+ * @param   $codi_postal
+ * @param   $pass
+ * @param   $rol
+ * @param   $codi_ss
+ * @param   $num_nomina
+ * @param   $iban
+ * @param   $especialitat
+ * @param   $carrec
+ * @param   $data_inici
+ * @param   $data_fi
+ * @param   $horari
+ * @return
+ */
   function __construct23($nom, $cognom1, $cognom2, $tipus_doc, $num_doc, $data, $sexe, $tlf,
   $email, $adreca, $ciutat, $provincia, $codi_postal, $pass, $rol, $codi_ss, $num_nomina, $iban, $especialitat, $carrec, $data_inici, $data_fi, $horari) {
    $this->id_empleat = NULL;
@@ -85,6 +112,7 @@ class Empleat {
   /**
   * Mètode per a crear empleats
   */
+
   public function crearEmpleat()
   {
     try
@@ -143,8 +171,10 @@ class Empleat {
       throw $e;
     }
   }
-  /**
+
+ /**
   * Mètode per a validar el login
+  * @return boolean
   */
   public function validarLogin()
   {
@@ -195,7 +225,7 @@ class Empleat {
     }
     $connection->close();
   }
-  /**
+ /**
   * Mètode per a llistar usuaris amb búsqueda
   */
   public static function SelecciollistarUsuarisBusqueda(){
@@ -524,7 +554,11 @@ class Empleat {
     }
     echo '</table>';
   }
-  /**Mètode per a modificar les dades*/
+
+/**
+ * Mètode per a modificar les dades
+ * @param  $connection
+ */
   public function modificar_empleat($connection){
 
     $id_empleat = $_POST['id_empleat'];
@@ -571,7 +605,10 @@ class Empleat {
       }
   }
 
-  /**Mètode per a eliminar un empleat*/
+  /**
+   * eliminar empleat
+   * @param  $connection
+   */
   public function eliminar_empleat($connection){
     $id_empleat = $_POST['id_empleat'];
     $sql_delete = "DELETE FROM USUARI WHERE id_usuari=$id_empleat";

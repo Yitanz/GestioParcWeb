@@ -496,7 +496,9 @@
               <video width="700" controls>
                 <source src="/video/Rollercoaster.mp4" type="video/mp4">
               </video>
-
+              <audio controls>
+                <source src="/video/horse.mp3" type="audio/mp3">
+              </audio>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
